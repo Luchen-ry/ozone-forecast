@@ -1,0 +1,10 @@
+Method,RMSE,MAE,MAPE,Peak_RMSE,Step6_RMSE,Source
+MTGNN (L=24),10.6620,7.3383,29.99,13.3536,13.1806,"official raw, seed42"
+MTGNN (L=12),10.8028,7.3465,30.50,13.3002,13.3112,"official raw, seed42"
+Graph WaveNet (L=12),11.5354,7.7982,33.60,11.8217,14.6265,"official raw, seed42"
+AGCRN (L=12),11.6858,8.2093,34.78,15.0214,14.5599,"official raw, seed42"
+DCRNN,12.2813,8.5124,36.46,15.5737,15.7136,"official raw, seed42"
+ATGCN-PE3 noleak,11.8944,8.6023,35.46,16.1119,14.6744,"ATGCN raw, seed42"
+ATGCN-PE3 + horizon-weight loss,11.7549,8.4868,35.98,15.6276,14.5510,"ATGCN raw, seed42"
+PE-DiffWaveNet backbone (ours),10.9380 ± 0.3353,7.5618 ± 0.1968,30.79 ± 0.85,13.8293 ± 1.0947,13.6100 ± 0.6096,"ours raw, seeds 42/52/62"
+PE-DiffWaveNet + PE-guided loss,11.1021 ± 0.1483,7.7966 ± 0.1331,31.88 ± 0.52,13.8010 ± 0.5895,13.6831 ± 0.1506,"ours raw, seeds 42/52/62"

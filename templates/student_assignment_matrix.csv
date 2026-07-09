@@ -1,0 +1,9 @@
+group,task,minimum_output,preferred_output,owner,deadline,notes
+A,data_summary,data_missing_summary.csv,data_summary.md + figures,,,统计 O3/PM2.5/PM10 缺失和分布
+A,station_analysis,station_table.csv,station_map_or_scatter.png,,,使用 xlsx_N95/station_loc1.xlsx
+B,baseline_reproduce,baseline_results.csv,baseline_logs + config,,,优先复核已有主表字段
+C,pedw_smoke,smoke_log.txt,smoke_output_dir,,,先跑 scripts/run_smoke_cpu.sh
+C,pedw_main,results.csv,logs + metrics + predictions,,,seq_len=24 pre_len=6 seed=42
+C,ablation,ablation_results.csv,table2_style_summary,,,无扩散/无PE图/无PE FiLM
+D,table_merge,merged_results.csv,table1_table2_table3_drafts,,,向 paper_assets 字段对齐
+D,figures,figures/,paper_style_png_pdf,,,真实值预测曲线、per-step RMSE、柱状图

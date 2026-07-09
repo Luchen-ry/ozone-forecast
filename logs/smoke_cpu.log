@@ -1,0 +1,71 @@
+[INFO] PE-DiffWaveNet noleak training
+[INFO] device=cpu, world_size=1
+[INFO] output_dir=.\matrix_N95_PEDiffWaveNet_noleak_student_smoke_cpu
+[INFO] clean_room=1, pe_source=train, use_pe_graph=1, use_pe_film=1, use_diffusion=1, pe_graph_alpha=1.0, pe_film_scale=1.0, pe_film_zero_init=0, pe_shuffle_seed=-1, pe_adaptive_loss=0, pe_loss_weight=0.15
+[INFO] loading meteorological data...
+[INFO] loading met cache: .\matrix_N95\met_raw_aligned_cache.npz
+[INFO] train: downsample windows 7349 -> 8
+[INFO] valid: downsample windows 640 -> 4
+[INFO] test: downsample windows 641 -> 4
+[INFO] trainX=(8, 24, 95, 15), trainY=(8, 6, 95)
+[INFO] validX=(4, 24, 95, 15), validY=(4, 6, 95)
+[INFO] testX=(4, 24, 95, 15), testY=(4, 6, 95)
+[INFO] train-only PE time range: {'start_idx': 0, 'end_idx': 7377, 'start_time': '2022-01-01 00:00:00', 'end_time': '2022-11-05 23:00:00', 'length': 7378}
+[INFO] building PE features: nodes=95, scales=[6, 9, 12, 24, 48, 72], step=168
+[INFO] PE feature progress: 20/95
+[INFO] PE feature progress: 40/95
+[INFO] PE feature progress: 60/95
+[INFO] PE feature progress: 80/95
+[INFO] PE feature progress: 95/95
+[INFO] building PE features: nodes=95, scales=[6, 9, 12, 24, 48, 72], step=168
+[INFO] PE feature progress: 20/95
+[INFO] PE feature progress: 40/95
+[INFO] PE feature progress: 60/95
+[INFO] PE feature progress: 80/95
+[INFO] PE feature progress: 95/95
+[INFO] graph nnz: S=691, T=1570, PE=317
+[INFO] train batches/epoch=4, effective_batch=2
+[INFO] model_params=46451
+E:\臭氧预测资料\code\train_pediffwavenet_noleak.py:410: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+[INFO] start epoch 1/1
+  Epoch 1 Batch 1/4 | Loss=1.730160 | diff=1.5709 | coarse=1.9912 | 0.8s
+  Epoch 1 Batch 2/4 | Loss=1.970498 | diff=1.7880 | coarse=2.2808 | 1.1s
+  Epoch 1 Batch 3/4 | Loss=2.006102 | diff=1.8187 | coarse=2.3421 | 1.3s
+  Epoch 1 Batch 4/4 | Loss=1.356584 | diff=1.2232 | coarse=1.6673 | 1.5s
+Epoch 1/1 | Loss=1.765836 | Val RMSE=171.9204 | Val MAE=170.0135 | Val MAPE=902.23% | LR=7.00e-04 | 1.7s
+  [BEST] epoch=1, val_rmse=171.9204
+[INFO] PE-DiffWaveNet noleak training finished
+{
+  "split_mode": "noleak",
+  "model_name": "PE-DiffWaveNet",
+  "best_epoch": 1,
+  "best_valid_rmse": 171.92036004654807,
+  "best_valid_mae": 170.01347473830296,
+  "best_valid_mape": 902.233879221487,
+  "test_rmse": 166.78471278279892,
+  "test_mae": 164.6760262539845,
+  "test_mape": 848.0105804195382,
+  "relative_rmse": 40.679198239707056,
+  "relative_mae": 40.16488445219134,
+  "train_scale_max": 410.0,
+  "world_size": 1,
+  "eval_inference_steps": 2,
+  "eval_num_samples": 1,
+  "eval_t_start_ratio": 0.25,
+  "use_diffusion": 1,
+  "use_pe_graph": 1,
+  "use_pe_film": 1,
+  "pe_source": "train",
+  "pe_graph_alpha": 1.0,
+  "pe_film_scale": 1.0,
+  "pe_film_zero_init": 0,
+  "normalize_pe_features": 1,
+  "pe_shuffle_seed": -1,
+  "pe_adaptive_loss": 0,
+  "pe_loss_weight": 0.15,
+  "pe_loss_start_step": 4,
+  "pe_loss_normalize": 1
+}
+[INFO] outputs: .\matrix_N95_PEDiffWaveNet_noleak_student_smoke_cpu
+[INFO] weights: .\weights_N95/weights_pediffwavenet_noleak_student_smoke_cpu

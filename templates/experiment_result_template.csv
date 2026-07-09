@@ -1,0 +1,1 @@
+group,student,experiment_id,model,seq_len,pre_len,seed,use_diffusion,use_pe_graph,use_pe_film,pe_adaptive_loss,lr,epochs,best_epoch,rmse,mae,mape,peak_rmse,step1_rmse,step6_rmse,output_dir,log_file,notes

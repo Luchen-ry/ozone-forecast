@@ -1,0 +1,29 @@
+{
+  "pe_source": "train",
+  "pe_main_result_safe": true,
+  "S_nnz": 691,
+  "T_nnz": 1570,
+  "PE_nnz": 317,
+  "use_pe_graph": 1,
+  "use_pe_film": 1,
+  "pe_graph_alpha": 1.0,
+  "pe_film_scale": 1.0,
+  "pe_film_zero_init": 0,
+  "normalize_pe_features": 1,
+  "pe_shuffle_seed": -1,
+  "pe_shuffle_enabled": 0,
+  "pe_adaptive_loss": 0,
+  "pe_loss_weight": 0.15,
+  "pe_loss_start_step": 4,
+  "pe_loss_normalize": 1,
+  "pe_scales": [
+    6,
+    9,
+    12,
+    24,
+    48,
+    72
+  ],
+  "pe_graph_threshold": 0.9,
+  "pe_graph_sigma": 0.1
+}
