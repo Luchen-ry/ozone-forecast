@@ -10,6 +10,4 @@ dependencies:
   - scikit-learn
   - matplotlib
   - openpyxl
-  - pip:
-    - tensorflow[and-cuda]
-    - geopy
+
