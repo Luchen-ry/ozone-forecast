@@ -1,0 +1,46 @@
+## 运行方式
+1. 进入项目目录
+cd /home/cl/ozone-forecast
+2. 用 nohup 后台跑全部 13 个实验（串行，单卡）
+nohup bash scripts/run_all_experiments.sh > logs/all_experiments.log 2>&1 &
+echo $!
+3. 实时查看进度
+tail -f logs/all_experiments.log
+按 Ctrl+C 退出查看（不会停止后台任务）。
+
+4. 指定某张 GPU（多卡服务器）
+CUDA_VISIBLE_DEVICES=0 nohup bash scripts/run_all_experiments.sh > logs/all_experiments.log 2>&1 &
+5. 检查是否还在跑
+ps aux | grep run_all_experiments
+## 实验矩阵（13 个，按顺序执行）
+# 实验名 seq_len pre_len seed 关键配置 1-3 g3_pedw_p6_l24_s{42,52,62} 24 6 42/52/62 主实验 + 多 seed 4-5 g3_pedw_p6_l{12,48}_s42 12/48 6 42 输入窗口 6-9 g3_pedw_p{1,3,12,24}_l24_s42 24 1/3/12/24 42 预测步长 10 g3_pedw_no_diff_p6_l24_s42 24 6 42 USE_DIFFUSION=0 11 g3_pedw_no_pe_graph_p6_l24_s42 24 6 42 USE_PE_GRAPH=0 12 g3_pedw_no_pe_film_p6_l24_s42 24 6 42 USE_PE_FILM=0 13 g3_pedw_pe_shuffle52_p6_l24_s42 24 6 42 PE_SHUFFLE_SEED=52
+
+正式配置： EPOCHS=120 HIDDEN_SIZE=64 DIFF_STEPS=50 INFERENCE_STEPS=50 NUM_SAMPLES=3 （脚本默认值）。
+
+## 自动产出的文件
+- experiment_results.csv ：汇总表，每个实验一行，含 RMSE/MAE/MAPE/Peak_RMSE/Step6_RMSE/状态/命令
+- logs/<exp_name>.log ：每个实验的完整训练日志
+- matrix_N95_PEDiffWaveNet_noleak_<exp_name>/ ：每个实验的输出目录，含 metrics_summary.json （含 per_step_rmse 列表、peak 指标）、 config.json 、 test_predictions.npy 等
+- weights_N95/weights_pediffwavenet_noleak_<exp_name>/ ：模型权重
+## 单独跑某个实验
+如果只想跑一个（比如先跑主实验确认）：
+
+```
+cd /home/cl/ozone-forecast
+DEVICE=cuda EPOCHS=120 
+EXP_NAME=g3_pedw_p6_l24_s42 \
+  nohup bash scripts/run_train_pediffwavenet.sh 6 24 42 > logs/g3_pedw_p6_l24_s42.log 2>&1 &
+```
+已运行
+nohup bash scripts/run_train_pediffwavenet.sh 6 24 42 > logs/g3_pedw_p6_l24_s42.log 2>&1 &
+
+nohup bash scripts/run_all_experiments.sh > logs/all_experiments.log 2>&1 &
+
+nohup bash scripts/run_train_pediffwavenet.sh 3 24 42 > logs/g3_pedw_p3_l24_s42_rerun.log 2>&1 &
+
+
+正在运行：
+DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p3_l24_s42 \
+LR=3e-4 AMP=0 PATIENCE=25 \
+nohup bash scripts/run_train_pediffwavenet.sh 3 24 42 > logs/g3_pedw_p3_l24_s42_fix.log 2>&1 &
+1162909

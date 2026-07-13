@@ -1,0 +1,6 @@
+Model,seq_len,pre_len,seed,RMSE,MAE,MAPE(%),Peak_RMSE,Step6_RMSE,Notes
+PE-DiffWaveNet,24,6,42,11.24,7.91,31.89,14.15,13.92,主实验
+PE-DiffWaveNet,24,6,52,11.13,7.98,32.39,13.83,13.73,
+PE-DiffWaveNet,24,6,62,11.51,8.17,32.56,13.26,13.97,
+PE-DiffWaveNet(mean±std),24,6,-,11.29±0.16,8.02±0.12,32.28±0.29,13.75±0.37,13.87±0.12,3 seeds
+DiffSTG,24,6,42,95.95,74.41,564.82,-,-,"仅2 epoch, 未充分训练"

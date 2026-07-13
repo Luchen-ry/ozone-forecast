@@ -1,0 +1,85 @@
+nohup: ignoring input
+
+============================================================
+[2026-07-11 13:42:56] START: g3_pedw_p6_l24_s42  (seq=24 pre=6 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 14:26:04] END: g3_pedw_p6_l24_s42 -> success  RMSE=11.240200308234002 MAE=7.90931254028974 MAPE=31.89117228152789
+
+============================================================
+[2026-07-11 14:26:04] START: g3_pedw_p6_l24_s52  (seq=24 pre=6 seed=52 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 14:55:04] END: g3_pedw_p6_l24_s52 -> success  RMSE=11.126345105960093 MAE=7.981111345459437 MAPE=32.39232006829191
+
+============================================================
+[2026-07-11 14:55:04] START: g3_pedw_p6_l24_s62  (seq=24 pre=6 seed=62 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 15:32:46] END: g3_pedw_p6_l24_s62 -> success  RMSE=11.50911029649757 MAE=8.17224774752324 MAPE=32.56308351980074
+
+============================================================
+[2026-07-11 15:32:46] START: g3_pedw_p6_l12_s42  (seq=12 pre=6 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 16:04:30] END: g3_pedw_p6_l12_s42 -> success  RMSE=11.634008829694176 MAE=8.319543482203091 MAPE=34.24722200776616
+
+============================================================
+[2026-07-11 16:04:30] START: g3_pedw_p6_l48_s42  (seq=48 pre=6 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 16:37:54] END: g3_pedw_p6_l48_s42 -> success  RMSE=11.180729390221764 MAE=7.935971747116411 MAPE=31.873883609699917
+
+============================================================
+[2026-07-11 16:37:54] START: g3_pedw_p1_l24_s42  (seq=24 pre=1 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 17:18:14] END: g3_pedw_p1_l24_s42 -> success  RMSE=6.878034888034746 MAE=4.996095732087004 MAPE=21.02127049076
+
+============================================================
+[2026-07-11 17:18:14] START: g3_pedw_p3_l24_s42  (seq=24 pre=3 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 17:42:04] END: g3_pedw_p3_l24_s42 -> success  RMSE=11.62764430296796 MAE=9.363566733416736 MAPE=43.310392314866675
+
+============================================================
+[2026-07-11 17:42:04] START: g3_pedw_p12_l24_s42  (seq=24 pre=12 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 18:10:39] END: g3_pedw_p12_l24_s42 -> success  RMSE=14.238816797317561 MAE=10.143892749033993 MAPE=38.609136353506116
+
+============================================================
+[2026-07-11 18:10:39] START: g3_pedw_p24_l24_s42  (seq=24 pre=24 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 18:37:02] END: g3_pedw_p24_l24_s42 -> success  RMSE=16.788605082449536 MAE=12.46810061106941 MAPE=48.4153788384291
+
+============================================================
+[2026-07-11 18:37:02] START: g3_pedw_no_diff_p6_l24_s42  (seq=24 pre=6 seed=42 diff=0 pe_graph=1 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 18:57:07] END: g3_pedw_no_diff_p6_l24_s42 -> success  RMSE=10.92609705489426 MAE=7.575127738732452 MAPE=29.90256386060518
+
+============================================================
+[2026-07-11 18:57:07] START: g3_pedw_no_pe_graph_p6_l24_s42  (seq=24 pre=6 seed=42 diff=1 pe_graph=0 pe_film=1 pe_shuffle=-1)
+============================================================
+[2026-07-11 19:34:37] END: g3_pedw_no_pe_graph_p6_l24_s42 -> success  RMSE=11.333553185110024 MAE=7.9542111390600185 MAPE=31.893778347613548
+
+============================================================
+[2026-07-11 19:34:37] START: g3_pedw_no_pe_film_p6_l24_s42  (seq=24 pre=6 seed=42 diff=1 pe_graph=1 pe_film=0 pe_shuffle=-1)
+============================================================
+[2026-07-11 19:56:26] END: g3_pedw_no_pe_film_p6_l24_s42 -> success  RMSE=13.836111662033098 MAE=10.609407962292758 MAPE=43.99223714883611
+
+============================================================
+[2026-07-11 19:56:26] START: g3_pedw_pe_shuffle52_p6_l24_s42  (seq=24 pre=6 seed=42 diff=1 pe_graph=1 pe_film=1 pe_shuffle=52)
+============================================================
+[2026-07-11 20:22:26] END: g3_pedw_pe_shuffle52_p6_l24_s42 -> success  RMSE=12.49444148553379 MAE=9.551513906057027 MAPE=43.28873083283974
+
+============================================================
+全部实验完成！结果汇总: /home/cl/ozone-forecast/experiment_results.csv
+各实验日志: /home/cl/ozone-forecast/logs/<exp_name>.log
+============================================================
+experiment_id,model,seq_len,pre_len,seed,use_diffusion,use_pe_graph,use_pe_film,pe_shuffle_seed,rmse,mae,mape,peak_rmse,step6_rmse,best_epoch,output_dir,log_file,command,status
+g3_pedw_p6_l24_s42,PE-DiffWaveNet,24,6,42,1,1,1,-1,11.240200308234002,7.90931254028974,31.89117228152789,14.154732650364165,13.916746030508309,49,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p6_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_p6_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p6_l24_s42 bash scripts/run_train_pediffwavenet.sh 6 24 42",success
+g3_pedw_p6_l24_s52,PE-DiffWaveNet,24,6,52,1,1,1,-1,11.126345105960093,7.981111345459437,32.39232006829191,13.830286802815683,13.72742168260257,21,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p6_l24_s52,/home/cl/ozone-forecast/logs/g3_pedw_p6_l24_s52.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p6_l24_s52 bash scripts/run_train_pediffwavenet.sh 6 24 52",success
+g3_pedw_p6_l24_s62,PE-DiffWaveNet,24,6,62,1,1,1,-1,11.50911029649757,8.17224774752324,32.56308351980074,13.264367750950314,13.974514481685201,41,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p6_l24_s62,/home/cl/ozone-forecast/logs/g3_pedw_p6_l24_s62.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p6_l24_s62 bash scripts/run_train_pediffwavenet.sh 6 24 62",success
+g3_pedw_p6_l12_s42,PE-DiffWaveNet,12,6,42,1,1,1,-1,11.634008829694176,8.319543482203091,34.24722200776616,13.478259282770237,14.279699962193959,28,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p6_l12_s42,/home/cl/ozone-forecast/logs/g3_pedw_p6_l12_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p6_l12_s42 bash scripts/run_train_pediffwavenet.sh 6 12 42",success
+g3_pedw_p6_l48_s42,PE-DiffWaveNet,48,6,42,1,1,1,-1,11.180729390221764,7.935971747116411,31.873883609699917,12.336794425141852,13.485741325259763,32,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p6_l48_s42,/home/cl/ozone-forecast/logs/g3_pedw_p6_l48_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p6_l48_s42 bash scripts/run_train_pediffwavenet.sh 6 48 42",success
+g3_pedw_p1_l24_s42,PE-DiffWaveNet,24,1,42,1,1,1,-1,6.878034888034746,4.996095732087004,21.02127049076,5.675400343277801,,46,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p1_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_p1_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p1_l24_s42 bash scripts/run_train_pediffwavenet.sh 1 24 42",success
+g3_pedw_p3_l24_s42,PE-DiffWaveNet,24,3,42,1,1,1,-1,11.62764430296796,9.363566733416736,43.310392314866675,9.448456287196755,,12,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p3_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_p3_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p3_l24_s42 bash scripts/run_train_pediffwavenet.sh 3 24 42",success
+g3_pedw_p12_l24_s42,PE-DiffWaveNet,24,12,42,1,1,1,-1,14.238816797317561,10.143892749033993,38.609136353506116,18.520819042331286,14.636418869145052,21,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p12_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_p12_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p12_l24_s42 bash scripts/run_train_pediffwavenet.sh 12 24 42",success
+g3_pedw_p24_l24_s42,PE-DiffWaveNet,24,24,42,1,1,1,-1,16.788605082449536,12.46810061106941,48.4153788384291,25.352199040922365,14.548566328885224,18,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_p24_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_p24_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_p24_l24_s42 bash scripts/run_train_pediffwavenet.sh 24 24 42",success
+g3_pedw_no_diff_p6_l24_s42,PE-DiffWaveNet,24,6,42,0,1,1,-1,10.92609705489426,7.575127738732452,29.90256386060518,14.966705958690584,13.612256792334898,19,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_no_diff_p6_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_no_diff_p6_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_no_diff_p6_l24_s42 USE_DIFFUSION=0 bash scripts/run_train_pediffwavenet.sh 6 24 42",success
+g3_pedw_no_pe_graph_p6_l24_s42,PE-DiffWaveNet,24,6,42,1,0,1,-1,11.333553185110024,7.9542111390600185,31.893778347613548,13.403204328859374,14.093772573577114,41,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_no_pe_graph_p6_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_no_pe_graph_p6_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_no_pe_graph_p6_l24_s42 USE_PE_GRAPH=0 bash scripts/run_train_pediffwavenet.sh 6 24 42",success
+g3_pedw_no_pe_film_p6_l24_s42,PE-DiffWaveNet,24,6,42,1,1,0,-1,13.836111662033098,10.609407962292758,43.99223714883611,13.3413439484464,15.755142681956338,19,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_no_pe_film_p6_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_no_pe_film_p6_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_no_pe_film_p6_l24_s42 USE_PE_FILM=0 bash scripts/run_train_pediffwavenet.sh 6 24 42",success
+g3_pedw_pe_shuffle52_p6_l24_s42,PE-DiffWaveNet,24,6,42,1,1,1,52,12.49444148553379,9.551513906057027,43.28873083283974,11.608863452828562,14.747744090870153,15,/home/cl/ozone-forecast/matrix_N95_PEDiffWaveNet_noleak_g3_pedw_pe_shuffle52_p6_l24_s42,/home/cl/ozone-forecast/logs/g3_pedw_pe_shuffle52_p6_l24_s42.log,"cd '/home/cl/ozone-forecast' && DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_pe_shuffle52_p6_l24_s42 PE_SHUFFLE_SEED=52 bash scripts/run_train_pediffwavenet.sh 6 24 42",success

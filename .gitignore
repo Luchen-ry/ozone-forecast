@@ -1,0 +1,9 @@
+matrix_N95_*/
+
+matrix_N95_*/
+weights_N95_*/
+*.npy
+*.pt
+*.zip
+__pycache__/
+*.pyc
