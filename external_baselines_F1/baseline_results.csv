@@ -1,0 +1,2 @@
+group,student,experiment_id,model,seq_len,pre_len,seed,use_diffusion,use_pe_graph,use_pe_film,pe_adaptive_loss,lr,epochs,best_epoch,rmse,mae,mape,peak_rmse,step1_rmse,step6_rmse,output_dir,log_file,notes
+C,待填,diffstg_air_n95_baseline,DiffSTG,24,6,42,1,0,0,0,0.002,120,17,41.10,34.50,557.66,,,,external_baselines/DiffSTG/output/model/,external_baselines/DiffSTG/output/log/,"F=1 (O3 only, no meteorological variables). RTX 3050 Laptop 4GB. seq_len=24 pre_len=6 seed=42. Training stopped at epoch 17 (early_stop=15). DiffSTG uses denoising diffusion + UGnet backbone."
