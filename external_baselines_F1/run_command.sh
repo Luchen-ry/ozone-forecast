@@ -8,7 +8,7 @@
 # 一、验证官方代码可运行（PEMS08 自带数据集）
 # ============================================================
 
-cd external_baselines/DiffSTG
+cd external_baselines_F1/DiffSTG
 
 python train.py \
   --data PEMS08 \
@@ -32,8 +32,8 @@ python train.py \
 # 二、生成本项目数据（95 站点 O3）
 # ============================================================
 
-cd "d:/生产实习-时空数据/臭氧预测资料"
-python external_baselines/prepare_air_n95_for_diffstg.py
+cd "$PROJECT_ROOT"
+python external_baselines_F1/prepare_air_n95_for_diffstg.py
 
 # 终端输出：
 # ┌─────────────────────────────────────────────────────────────┐
@@ -46,7 +46,7 @@ python external_baselines/prepare_air_n95_for_diffstg.py
 # 三、AIR_N95 烟雾测试（极简配置，验证流程）
 # ============================================================
 
-cd external_baselines/DiffSTG
+cd external_baselines_F1/DiffSTG
 
 python train.py \
   --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
@@ -66,11 +66,9 @@ python train.py \
 # 四、AIR_N95 正式训练（seq_len=24, pre_len=6, seed=42，F=1）
 # ============================================================
 
-cd external_baselines/DiffSTG
+cd external_baselines_F1/DiffSTG
 
-python train.py \
-  --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+python train.py --data AIR_N95 --T_h 24 --T_p 6 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # 终端关键输出：
 # ┌─────────────────────────────────────────────────────────────┐
@@ -131,22 +129,22 @@ python train.py \
 #    用途：观察 RMSE 随预测步长的衰减曲线
 # ============================================================
 
-cd external_baselines/DiffSTG
+cd external_baselines_F1/DiffSTG
 
 # pre_len=1（已有结果 per-step RMSE 第一步=25.0）
-python train.py --data AIR_N95 --T_h 24 --T_p 1 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+python train.py --data AIR_N95 --T_h 24 --T_p 1 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # pre_len=3
-python train.py --data AIR_N95 --T_h 24 --T_p 3 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+python train.py --data AIR_N95 --T_h 24 --T_p 3 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # pre_len=6（已完成，RMSE=41.10）
 # 使用第四节结果
 
 # pre_len=12
-python train.py --data AIR_N95 --T_h 24 --T_p 12 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 8 --n_samples 1
+python train.py --data AIR_N95 --T_h 24 --T_p 12 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # pre_len=24
-python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 8 --n_samples 1
+python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 
 # ============================================================
@@ -155,20 +153,20 @@ python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 --N 50 --sample_steps
 # ============================================================
 
 # 先运行脚本生成两种新邻接矩阵
-cd "d:/生产实习-时空数据/臭氧预测资料"
-python external_baselines/prepare_alt_adj.py
+cd "$PROJECT_ROOT"
+python external_baselines_F1/prepare_alt_adj.py
 
 # 8a. 相关图（Pearson 相关矩阵）
 #     手动将 output/corr_adj.npy 复制替换 data/dataset/AIR_N95/adj.npy
 python train.py \
   --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # 8b. PE 图（排列熵相似度矩阵）
 #     手动将 output/pe_adj.npy 复制替换 data/dataset/AIR_N95/adj.npy
 python train.py \
   --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 
 # ============================================================
@@ -177,19 +175,19 @@ python train.py \
 # ============================================================
 
 # 先运行数据提取脚本生成 PM flow.npy
-cd "d:/生产实习-时空数据/臭氧预测资料"
-python external_baselines/prepare_pm_data.py
+cd "$PROJECT_ROOT"
+python external_baselines_F1/prepare_pm_data.py
 
 # 9a. PM2.5
-cd external_baselines/DiffSTG
+cd external_baselines_F1/DiffSTG
 python train.py \
   --data AIR_N95_PM25 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # 9b. PM10
 python train.py \
   --data AIR_N95_PM10 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 16 --n_samples 1
+  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 
 # ============================================================
@@ -203,9 +201,9 @@ python train.py \
 #   画置信区间阴影带（预测均值 ± 标准差）
 #
 # 每个实验的输出目录中包含 forecast.pkl，运行：
-cd "d:/生产实习-时空数据/臭氧预测资料"
-python external_baselines/plot_probability_metrics.py
-#   → 输出各实验的 CRPS/MIS + 置信区间图到 external_baselines/figures/
+cd "$PROJECT_ROOT"
+python external_baselines_F1/plot_probability_metrics.py
+#   → 输出各实验的 CRPS/MIS + 置信区间图到 external_baselines_F1/figures/
 
 
 # ============================================================

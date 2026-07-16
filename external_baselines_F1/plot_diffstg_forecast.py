@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 import pickle
 from pathlib import Path
 
-ROOT = Path(r'd:\生产实习-时空数据\臭氧预测资料')
-FIG_DIR = ROOT / 'analysis_output' / 'figures'
+ROOT = Path(__file__).resolve().parent.parent
+FIG_DIR = ROOT / 'external_baselines_F1' / 'figures'
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---- 1. Load forecast pkl ----
-pkl_path = ROOT / 'external_baselines' / 'DiffSTG' / 'output' / 'forecast' / \
+pkl_path = ROOT / 'external_baselines_F1' / 'DiffSTG' / 'output' / 'forecast' / \
     'UGnet+32+50+quad+0.1+50+ddpm+24+6+42+1+True+AIR_N95+0.0+False+False+0.002+4.pkl'
 with open(pkl_path, 'rb') as f:
     samples, targets, observed_flag, evaluate_flag = pickle.load(f)

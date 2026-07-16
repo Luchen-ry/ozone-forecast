@@ -11,7 +11,7 @@ Output (written to DiffSTG data directory):
 
 Usage:
   cd "/d/生产实习-时空数据/臭氧预测资料"
-  python external_baselines/prepare_air_n95_for_diffstg.py
+  python external_baselines_F1/prepare_air_n95_for_diffstg.py
 """
 import numpy as np
 import pandas as pd
@@ -19,7 +19,7 @@ from pathlib import Path
 from geopy.distance import geodesic
 
 ROOT = Path(__file__).resolve().parent.parent
-DST = ROOT / 'external_baselines' / 'DiffSTG' / 'data' / 'dataset' / 'AIR_N95'
+DST = ROOT / 'external_baselines_F1' / 'DiffSTG' / 'data' / 'dataset' / 'AIR_N95'
 DST.mkdir(parents=True, exist_ok=True)
 
 # ---- 1. flow.npy: (T, N, F) = (8717, 95, 1) ----
@@ -48,5 +48,5 @@ sparsity = (adj != 0).sum() / adj.size
 print(f'[OK] adj.npy saved: {adj.shape}, non-zero={sparsity:.2%}')
 
 print('\nData ready. Now run:')
-print(f'  cd {ROOT / "external_baselines" / "DiffSTG"}')
+print(f'  cd external_baselines_F1/DiffSTG')
 print(f'  python train.py --data AIR_N95 --T_h 24 --T_p 6 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 8 --lr 7e-4 --n_samples 3')

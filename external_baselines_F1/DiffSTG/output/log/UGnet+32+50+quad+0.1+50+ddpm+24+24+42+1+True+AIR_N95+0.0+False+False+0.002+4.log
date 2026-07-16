@@ -1,0 +1,280 @@
+{'PATH_MOD': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/output/model/', 'PATH_LOG': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/output/log/', 'PATH_FORECAST': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/output/forecast/', 'data': {'name': 'AIR_N95', 'path': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/data/dataset/', 'feature_file': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/data/dataset/AIR_N95/flow.npy', 'spatial': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/data/dataset/AIR_N95/adj.npy', 'num_recent': 1, 'num_features': 1, 'num_vertices': 95, 'points_per_hour': 1, 'val_start_idx': 5230, 'test_start_idx': 6973}, 'gpu_id': None, 'model': {'T_p': 24, 'T_h': 24, 'V': 95, 'F': 1, 'week_len': 7, 'day_len': 24, 'device': device(type='cuda'), 'd_h': 32, 'N': 50, 'sample_steps': 50, 'epsilon_theta': 'UGnet', 'is_label_condition': True, 'beta_end': 0.1, 'beta_schedule': 'quad', 'sample_strategy': 'ddpm', 'channel_multipliers': [1, 2], 'supports_len': 2, 'C': 32, 'n_channels': 32}, 'n_samples': 1, 'model_name': 'DiffSTG', 'is_test': False, 'epoch': 300, 'optimizer': 'adam', 'lr': 0.002, 'batch_size': 4, 'wd': 1e-05, 'early_stop': 10, 'start_epoch': 0, 'device': device(type='cuda'), 'logger': <utils.common_utils.Logger object at 0x00000266FF3D30D0>, 'nni': False, 'mask_ratio': 0.0, 'T_h': 24, 'T_p': 24, 'trial_name': 'UGnet+32+50+quad+0.1+50+ddpm+24+24+42+1+True+AIR_N95+0.0+False+False+0.002+4', 'log_path': 'D:\\生产实习-时空数据\\1\\ozone-forecast\\external_baselines_F1\\DiffSTG/output/log//UGnet+32+50+quad+0.1+50+ddpm+24+24+42+1+True+AIR_N95+0.0+False+False+0.002+4.log'}
+model path:D:\生产实习-时空数据\1\ozone-forecast\external_baselines_F1\DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+24+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-24+epsilon_theta-UGnet.dm4stg
+forecast_path:D:\生产实习-时空数据\1\ozone-forecast\external_baselines_F1\DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+24+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-24+epsilon_theta-UGnet.dm4stg
+DiffSTG(
+  (eps_model): UGnet(
+    (down): ModuleList(
+      (0-1): 2 x DownBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Identity()
+          (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (2): Downsample(
+        (conv): Conv2d(32, 32, kernel_size=(1, 3), stride=(1, 2), padding=(0, 1))
+      )
+      (3): DownBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+            (shortcut): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (4): DownBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Identity()
+          (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+        )
+      )
+    )
+    (middle): MiddleBlock(
+      (res1): ResidualBlock(
+        (tcn1): TcnBlock(
+          (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+          (chomp): Chomp()
+          (drop): Dropout(p=0.0, inplace=False)
+          (net): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (1): Chomp()
+            (2): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (tcn2): TcnBlock(
+          (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+          (chomp): Chomp()
+          (drop): Dropout(p=0.0, inplace=False)
+          (net): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (1): Chomp()
+            (2): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (shortcut): Identity()
+        (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+        (spatial): SpatialBlock()
+        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+      )
+      (res2): ResidualBlock(
+        (tcn1): TcnBlock(
+          (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+          (chomp): Chomp()
+          (drop): Dropout(p=0.0, inplace=False)
+          (net): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (1): Chomp()
+            (2): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (tcn2): TcnBlock(
+          (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+          (chomp): Chomp()
+          (drop): Dropout(p=0.0, inplace=False)
+          (net): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (1): Chomp()
+            (2): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (shortcut): Identity()
+        (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+        (spatial): SpatialBlock()
+        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (up): ModuleList(
+      (0-1): 2 x UpBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+            (shortcut): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+          (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (2): UpBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(96, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(96, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+            (shortcut): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+          (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (3): Upsample(
+        (conv): ConvTranspose2d(32, 32, kernel_size=(1, 4), stride=(1, 2), padding=(0, 1))
+      )
+      (4-6): 3 x UpBlock(
+        (res): ResidualBlock(
+          (tcn1): TcnBlock(
+            (conv): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+            (shortcut): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (tcn2): TcnBlock(
+            (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+            (chomp): Chomp()
+            (drop): Dropout(p=0.0, inplace=False)
+            (net): Sequential(
+              (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 2))
+              (1): Chomp()
+              (2): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (shortcut): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
+          (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
+          (spatial): SpatialBlock()
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+        )
+      )
+    )
+    (x_proj): Conv2d(1, 32, kernel_size=(1, 1), stride=(1, 1))
+    (out): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(1, 1), stride=(1, 1))
+      (1): Linear(in_features=96, out_features=48, bias=True)
+    )
+  )
+)Num_of_parameters:913873
+      |---Train--- |---Val Future-- -|-----Val History----|
+Epoch | Loss  Time | MAE     RMSE    |  MAE    RMSE   Time|
+   1.0| 3.396 123.2s |[39.05  48.99  ] | 22.03  25.75  576.73s
+   2.0| 1.968 111.4s | 39.43  49.25   | 16.12  18.66  578.47s
+   3.0| 1.735 110.7s | 41.16  51.32   | 14.71  16.29  578.19s
+   4.0| 1.539 111.0s | 40.17  50.80   | 11.16  12.21  578.95s
+   5.0| 2.320 111.4s |[38.23  47.99  ] | 18.89  21.25  579.46s
+   6.0| 1.867 111.8s | 39.91  49.46   | 16.59  17.63  579.00s
+   7.0| 8.324 111.2s | 57.41  72.43   | 22.71  28.86  582.37s
+   8.0| 4.231 111.7s | 47.25  59.40   | 29.50  34.35  649.63s
+   9.0| 2.934 130.1s | 41.23  51.92   | 18.69  22.29  679.62s
+  10.0| 2.492 111.4s | 39.21  49.48   | 16.16  18.83  579.32s
+  11.0| 2.319 111.0s | 38.81  48.88   | 17.61  20.55  576.20s
+  12.0| 2.240 110.8s | 39.23  49.08   | 21.80  25.30  575.60s
+  13.0| 2.195 110.7s | 38.48  48.46   | 18.88  21.82  579.89s
+  14.0| 2.138 111.9s | 39.19  48.97   | 22.96  26.57  582.21s
+  15.0| 2.052 111.6s | 38.88  48.39   | 20.40  23.52  576.77s
+  16.0| 1.941 111.1s |[38.21  48.08  ] | 8.77   10.24  577.41s
+  17.0| 1.827 111.4s | 38.53  48.43   | 9.31   10.46  575.01s
+  18.0| 1.764 110.6s | 39.32  49.24   | 9.62   10.64  645.86s
+  19.0| 1.739 128.9s | 39.05  48.93   | 7.48   8.63   659.46s
+  20.0| 1.697 110.0s | 39.25  49.29   | 12.72  13.73  577.42s
+  21.0| 1.691 110.9s | 39.62  49.72   | 6.89   7.62   576.96s
+  22.0| 1.678 110.8s | 40.98  51.29   | 12.14  14.35  576.26s
+  23.0| 1.648 110.4s | 39.00  49.07   | 5.09   5.71   576.23s
+  24.0| 1.583 110.0s | 39.45  49.72   | 3.45   4.03   576.14s
+  25.0| 1.607 109.9s | 39.19  49.29   | 6.74   7.60   576.17s
+  26.0| 1.588 111.1s | 39.36  49.68   | 6.61   7.16   606.91s
+  27.0| 1.509 109.6s | 40.17  50.18   | 2.45   2.93   600.83s
+predict_path = 'D:\生产实习-时空数据\1\ozone-forecast\external_baselines_F1\DiffSTG/output/forecast/UGnet+32+50+quad+0.1+50+ddpm+24+24+42+1+True+AIR_N95+0.0+False+False+0.002+4.pkl'
+ |[41.89  48.65  ] | 18.10  19.56  474.30s
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:41.89  48.65  676.79 1.17    1675.67 | 27   

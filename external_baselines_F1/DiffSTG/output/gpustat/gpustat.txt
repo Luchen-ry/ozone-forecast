@@ -1,4 +1,4 @@
-Mon Jul 13 12:16:35 2026       
+Wed Jul 15 07:57:07 2026       
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 512.36       Driver Version: 512.36       CUDA Version: 11.6     |
 |-------------------------------+----------------------+----------------------+
@@ -7,7 +7,7 @@ Mon Jul 13 12:16:35 2026
 |                               |                      |               MIG M. |
 |===============================+======================+======================|
 |   0  NVIDIA GeForce ... WDDM  | 00000000:01:00.0  On |                  N/A |
-| N/A   34C    P8     8W /  N/A |    480MiB /  4096MiB |     10%      Default |
+| N/A   32C    P5     7W /  N/A |    384MiB /  4096MiB |      0%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
                                                                                
@@ -23,15 +23,17 @@ Mon Jul 13 12:16:35 2026
 |    0   N/A  N/A      8476    C+G   ...n1h2txyewy\SearchHost.exe    N/A      |
 |    0   N/A  N/A      8524    C+G   C:\Windows\explorer.exe         N/A      |
 |    0   N/A  N/A      9912    C+G   ...y\ShellExperienceHost.exe    N/A      |
+|    0   N/A  N/A     11144    C+G   ...updated_web\WXWorkWeb.exe    N/A      |
 |    0   N/A  N/A     13464    C+G   D:\RaiDrive.exe                 N/A      |
 |    0   N/A  N/A     13648    C+G   ....win64\steamwebhelper.exe    N/A      |
-|    0   N/A  N/A     15452    C+G   ...e6\promecefpluginhost.exe    N/A      |
+|    0   N/A  N/A     18708    C+G   ...e6\promecefpluginhost.exe    N/A      |
+|    0   N/A  N/A     20076    C+G   ...t\runtime\WeChatAppEx.exe    N/A      |
 |    0   N/A  N/A     20548    C+G   ...cw5n1h2txyewy\LockApp.exe    N/A      |
+|    0   N/A  N/A     25996    C+G   ...lugins\FlutterPlugins.exe    N/A      |
 |    0   N/A  N/A     26272    C+G   C:\Windows\explorer.exe         N/A      |
 |    0   N/A  N/A     27380    C+G   ...icrosoft VS Code\Code.exe    N/A      |
-|    0   N/A  N/A     31632    C+G   ...t\runtime\WeChatAppEx.exe    N/A      |
-|    0   N/A  N/A     36080    C+G   ...lugins\FlutterPlugins.exe    N/A      |
-|    0   N/A  N/A     36940    C+G   ...updated_web\WXWorkWeb.exe    N/A      |
+|    0   N/A  N/A     40552    C+G   ...ge\Application\msedge.exe    N/A      |
+|    0   N/A  N/A     42748    C+G   ...lPanel\SystemSettings.exe    N/A      |
 |    0   N/A  N/A     47032    C+G   ...Files\Tencent\QQNT\QQ.exe    N/A      |
-|    0   N/A  N/A     48272    C+G   ...ge\Application\msedge.exe    N/A      |
+|    0   N/A  N/A     60700    C+G   ...F\runtime\WeChatAppEx.exe    N/A      |
 +-----------------------------------------------------------------------------+
