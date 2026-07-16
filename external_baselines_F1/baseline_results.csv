@@ -1,2 +1,2 @@
 Method,RMSE,MAE,MAPE,Peak_RMSE,Step6_RMSE,Source
-DiffSTG (F=1, O3 only),41.10,34.50,557.66,,43.1,"our reproduction, seed42"
+"DiffSTG (F=1, O3 only)",41.10,34.50,557.66,,43.1,"our reproduction, seed42"

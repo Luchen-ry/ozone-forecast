@@ -1,6 +1,6 @@
 Method,RMSE,MAE,MAPE,Peak_RMSE,Step6_RMSE,Source
-DiffSTG (pre_len=1, F=1),13.08,9.61,122.21,N/A,N/A,our reproduction seed42
-DiffSTG (pre_len=3, F=1),32.42,26.60,426.64,N/A,N/A,our reproduction seed42
-DiffSTG (pre_len=6, F=1),41.10,34.50,557.66,N/A,43.1,our reproduction seed42
-DiffSTG (pre_len=12, F=1),45.70,39.10,636.65,N/A,N/A,our reproduction seed42
-DiffSTG (pre_len=24, F=1),48.65,41.89,676.79,N/A,N/A,our reproduction seed42
+"DiffSTG (pre_len=1, F=1)",13.08,9.61,122.21,N/A,N/A,our reproduction seed42
+"DiffSTG (pre_len=3, F=1)",32.42,26.60,426.64,N/A,N/A,our reproduction seed42
+"DiffSTG (pre_len=6, F=1)",41.10,34.50,557.66,N/A,43.1,our reproduction seed42
+"DiffSTG (pre_len=12, F=1)",45.70,39.10,636.65,N/A,N/A,our reproduction seed42
+"DiffSTG (pre_len=24, F=1)",48.65,41.89,676.79,N/A,N/A,our reproduction seed42
