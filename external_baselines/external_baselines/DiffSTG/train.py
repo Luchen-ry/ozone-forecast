@@ -3,6 +3,18 @@ import os, sys
 import torch
 import argparse
 import numpy as np
+
+
+def str2bool(v):
+    """argparse type=bool trap fix: bool('False') == True.
+    Use str2bool to correctly parse --is_test False / True / 0 / 1."""
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    if v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    raise argparse.ArgumentTypeError('Boolean value expected.')
 import torch.utils.data
 from easydict import EasyDict as edict
 from timeit import default_timer as timer
@@ -44,23 +56,27 @@ def get_params():
     parser.add_argument("--T_h", type=int, default=12)
     parser.add_argument("--T_p", type=int, default=6)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--num_features", type=int, default=None,
+                        help='override num_features for AIR_N95 (e.g. 15 for O3+met). None=auto from flow.npy')
+    parser.add_argument("--split_mode", type=str, default='default', choices=['default', 'noleak'],
+                        help='default=0.6/0.8 split; noleak=align PE-DiffWaveNet 0.8465/0.9232 split')
 
     # eval
     parser.add_argument('--n_samples', type=int, default=8)
 
     # train
-    parser.add_argument("--is_train", type=bool, default=True) # train or evaluate
+    parser.add_argument("--is_train", type=str2bool, default=True) # train or evaluate
     parser.add_argument("--data", type=str, default='PEMS08')
     parser.add_argument("--mask_ratio", type=float, default=0.0) # mask of history data
-    parser.add_argument("--is_test", type=bool, default=False)
-    parser.add_argument("--nni", type=bool, default=False)
+    parser.add_argument("--is_test", type=str2bool, default=False)
+    parser.add_argument("--nni", type=str2bool, default=False)
     parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--batch_size", type=int, default=8)
 
     args, _ = parser.parse_known_args()
     return args
 
-def default_config(data='AIR_BJ'):
+def default_config(data='AIR_BJ', params=None):
     config = edict()
     config.PATH_MOD = ws + '/output/model/'
     config.PATH_LOG = ws + '/output/log/'
@@ -97,13 +113,34 @@ def default_config(data='AIR_BJ'):
         config.data.test_start_idx = int(8160 * 11 / 12)
     
     if config.data.name == "AIR_N95":
-        config.data.num_features = 1
         config.data.num_vertices = 95
         config.data.points_per_hour = 1
 
-        total_len = np.load(config.data.feature_file).shape[0]
-        config.data.val_start_idx = int(total_len * 0.6)
-        config.data.test_start_idx = int(total_len * 0.8)
+        # auto-detect num_features from flow.npy, or use --num_features override
+        _flow = np.load(config.data.feature_file)
+        _num_features_override = params.get('num_features', None) if params else None
+        _split_mode = params.get('split_mode', 'default') if params else 'default'
+
+        if _num_features_override is not None:
+            config.data.num_features = _num_features_override
+        elif _flow.ndim == 3:
+            config.data.num_features = _flow.shape[-1]  # auto: 1 or 15
+        else:
+            config.data.num_features = 1
+        print(f'[AIR_N95] num_features={config.data.num_features} (flow shape={_flow.shape})')
+
+        total_len = _flow.shape[0]
+        if _split_mode == 'noleak':
+            # align with PE-DiffWaveNet noleak split: train=0.8465, val=0.9232, test=end
+            config.data.val_start_idx = int(total_len * 0.8465)
+            config.data.test_start_idx = int(total_len * 0.9232)
+            print(f'[AIR_N95] split_mode=noleak: train=[0,{config.data.val_start_idx}), '
+                  f'val=[{config.data.val_start_idx},{config.data.test_start_idx}), '
+                  f'test=[{config.data.test_start_idx},{total_len})')
+        else:
+            # default DiffSTG split: 0.6 / 0.8
+            config.data.val_start_idx = int(total_len * 0.6)
+            config.data.test_start_idx = int(total_len * 0.8)
 
     gpu_id = GPU().get_usefuel_gpu(max_memory=6000, condidate_gpu_id=[0,1,2,3,4,6,7,8])
     config.gpu_id = gpu_id
@@ -195,6 +232,12 @@ def evals(model, data_loader, epoch, metric, config, clean_data, mode='Test'):
         x_hat = x_hat.detach()
         f_x, f_x_hat = x[:,:,:,-config.model.T_p:], x_hat[:,:,:,:,-config.model.T_p:] # future
 
+        # For multi-channel data, only evaluate on channel 0 (O3) to align with PE-DiffWaveNet
+        # f_x: (B, F, V, T_p), f_x_hat: (B, n_samples, F, V, T_p)
+        if config.model.F > 1:
+            f_x = f_x[:, :1]            # (B, 1, V, T_p) keep only O3 channel
+            f_x_hat = f_x_hat[:, :, :1] # (B, n_samples, 1, V, T_p)
+
         _y_true_ = f_x.transpose(1, 3).cpu().numpy()  # y_true: (B, T_p, V, D)
         _y_pred_ = f_x_hat.transpose(2, 4).cpu().numpy() # y_pred: (B, n_samples, T_p, V, D)
         _y_pred_ = np.clip(_y_pred_, 0, np.inf)
@@ -204,6 +247,9 @@ def evals(model, data_loader, epoch, metric, config, clean_data, mode='Test'):
         y_true.append(_y_true_)
 
         h_x, h_x_hat = x[:, :, :, :config.model.T_h], x_hat[:, :, :, :,  :config.model.T_h]
+        if config.model.F > 1:
+            h_x = h_x[:, :1]
+            h_x_hat = h_x_hat[:, :, :1]
         _y_true_ = h_x.transpose(1, 3).cpu().numpy()  # y_true: (B, T_p, V, D)
         _y_pred_ = h_x_hat.transpose(2, 4).cpu().numpy()
         _y_pred_ = np.clip(_y_pred_, 0, np.inf)
@@ -259,7 +305,7 @@ def main(params: dict):
     # torch.manual_seed(2022)
     setup_seed(params.get('seed', 2022))
     torch.set_num_threads(2)
-    config = default_config(params['data'])
+    config = default_config(params['data'], params)
 
     config.is_test = params['is_test']
     config.nni = params['nni']

@@ -1,0 +1,46 @@
+nohup: ignoring input
+================================================
+[2026-07-13 23:24:38] Running DiffSTG pre_len=1
+  log: /home/cl/ozone-forecast/logs/diffstg_air_n95_F15_noleak_p1.log
+================================================
+[2026-07-13 23:46:00] pre_len=1 DONE (exit 0)
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:18.86  21.38  231.71 0.54    754.41  | 13   
+[2026-07-13 23:45:59] [32mFinal result: 18.860172[0m
+
+================================================
+[2026-07-13 23:46:00] Running DiffSTG pre_len=3
+  log: /home/cl/ozone-forecast/logs/diffstg_air_n95_F15_noleak_p3.log
+================================================
+[2026-07-14 00:06:22] pre_len=3 DONE (exit 0)
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:21.15  25.15  285.96 0.61    845.94  | 15   
+[2026-07-14 00:06:21] [32mFinal result: 21.148485[0m
+
+================================================
+[2026-07-14 00:06:22] Running DiffSTG pre_len=12
+  log: /home/cl/ozone-forecast/logs/diffstg_air_n95_F15_noleak_p12.log
+================================================
+[2026-07-14 00:24:38] pre_len=12 DONE (exit 0)
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:36.15  42.39  493.96 1.04    1446.08 | 12   
+[2026-07-14 00:24:37] [32mFinal result: 36.15191[0m
+
+================================================
+[2026-07-14 00:24:38] Running DiffSTG pre_len=24
+  log: /home/cl/ozone-forecast/logs/diffstg_air_n95_F15_noleak_p24.log
+================================================
+[2026-07-14 01:43:26] pre_len=24 DONE (exit 0)
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:27.11  33.52  406.30 0.77    1084.26 | 46   
+[2026-07-14 01:43:25] [32mFinal result: 27.106525[0m
+
+================================================
+[2026-07-14 01:43:26] All DiffSTG experiments finished.
+================================================
+
+Results summary:
+--- pre_len=1 ---
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:18.86  21.38  231.71 0.54    754.41  | 13   
+--- pre_len=3 ---
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:21.15  25.15  285.96 0.61    845.94  | 15   
+--- pre_len=12 ---
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:36.15  42.39  493.96 1.04    1446.08 | 12   
+--- pre_len=24 ---
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:27.11  33.52  406.30 0.77    1084.26 | 46   

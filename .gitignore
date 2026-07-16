@@ -7,3 +7,8 @@ weights_N95_*/
 *.zip
 __pycache__/
 *.pyc
+
+external_baselines/external_baselines/DiffSTG/output/
+*.pkl
+*.log
+*.dm4stg

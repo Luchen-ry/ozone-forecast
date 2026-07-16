@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import pandas as pd
+import torch
 from torch.utils.data import Dataset
 
 def search_recent_data(train, label_start_idx, T_p, T_h):
@@ -54,7 +55,12 @@ class CleanDataset():
         if 'PEMS' in self.data_name:
             data = np.expand_dims(np.load(self.feature_file)[:, :, 0], -1)
         elif 'AIR' in self.data_name:
-            data = np.expand_dims(np.load(self.feature_file)[:, :, 0], -1)
+            # support multi-channel (F>=1): if flow.npy has F dim, use it; else expand to F=1
+            raw = np.load(self.feature_file)
+            if raw.ndim == 3 and raw.shape[-1] > 1:
+                data = raw  # (T, V, F) multi-channel, e.g. AIR_N95 with met vars
+            else:
+                data = np.expand_dims(raw[:, :, 0], -1)  # legacy single-channel
             data = np.nan_to_num(data, nan=0)
         elif 'Metro' in self.data_name:
             data = np.expand_dims(np.load(self.feature_file)[:, :, 0], -1)
@@ -74,16 +80,50 @@ class CleanDataset():
         #     idx_lst = [i for i in range(train.shape[0]) if i % (24 * 6) >= 7 * 6 - 12]
         #     train = train[idx_lst]
 
-        mean = np.mean(train)
-        std = np.std(train)
+        # per-channel normalization: mean/std shape = (F,) for multi-channel, scalar for single-channel
+        # avoids scale explosion when O3 (~100) coexists with pressure (~95000) or radiation (~3e6)
+        if feature.ndim == 3 and feature.shape[-1] > 1:
+            # multi-channel (T, V, F): normalize along (T, V) per channel
+            mean = train.mean(axis=(0, 1))   # (F,)
+            std = train.std(axis=(0, 1))      # (F,)
+            std = np.where(std < 1e-8, 1.0, std)  # avoid div-by-zero for constant channels
+            feature_norm = (feature - mean) / std  # broadcasting (T,V,F) - (F,) -> (T,V,F)
+        else:
+            # single-channel: keep original scalar normalization
+            mean = np.mean(train)
+            std = np.std(train)
+            feature_norm = (feature - mean) / std
 
         # since the feature is actual the flow, the mean and std of feature is also the label's mean and std
         self.mean = mean
         self.std = std
-        return (feature - mean) / std
+        return feature_norm
 
     def reverse_normalization(self, x):
-        return self.mean + self.std * x
+        # x shape: (B, F, V, T) or (B, n_samples, F, V, T) — F is channel dim at index -3
+        # self.mean/std: (F,) ndarray for multi-channel, scalar for single-channel
+        mean, std = self.mean, self.std
+
+        # multi-channel: reshape (F,) -> (1, ..., F, 1, 1) to broadcast along F dim (index -3)
+        if isinstance(mean, np.ndarray) and mean.ndim == 1:
+            # build reshape: (1, 1, ..., F, 1, 1) where F is at position -3 of x
+            # x.shape[-3] should be F
+            F = mean.shape[0]
+            # x may be tensor or ndarray; ndim determines number of dims
+            ndim = x.ndim if hasattr(x, 'ndim') else x.dim()
+            shape = [1] * ndim
+            shape[-3] = F  # place F at channel dim
+            mean = mean.reshape(shape)
+            std = std.reshape(shape)
+
+        # convert to tensor if x is tensor
+        if isinstance(x, torch.Tensor):
+            if not isinstance(mean, torch.Tensor):
+                mean = torch.as_tensor(mean, dtype=x.dtype, device=x.device)
+            if not isinstance(std, torch.Tensor):
+                std = torch.as_tensor(std, dtype=x.dtype, device=x.device)
+
+        return mean + std * x
 
     # for stpgcn
     def interaction_range_mask(self, hops=2, t_size=3):
