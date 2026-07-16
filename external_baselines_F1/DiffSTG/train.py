@@ -105,6 +105,24 @@ def default_config(data='AIR_BJ'):
         config.data.val_start_idx = int(total_len * 0.6)
         config.data.test_start_idx = int(total_len * 0.8)
 
+    if config.data.name == "AIR_N95_PM25":
+        config.data.num_features = 1
+        config.data.num_vertices = 95
+        config.data.points_per_hour = 1
+
+        total_len = np.load(config.data.feature_file).shape[0]
+        config.data.val_start_idx = int(total_len * 0.6)
+        config.data.test_start_idx = int(total_len * 0.8)
+
+    if config.data.name == "AIR_N95_PM10":
+        config.data.num_features = 1
+        config.data.num_vertices = 95
+        config.data.points_per_hour = 1
+
+        total_len = np.load(config.data.feature_file).shape[0]
+        config.data.val_start_idx = int(total_len * 0.6)
+        config.data.test_start_idx = int(total_len * 0.8)
+
     gpu_id = GPU().get_usefuel_gpu(max_memory=6000, condidate_gpu_id=[0,1,2,3,4,6,7,8])
     config.gpu_id = gpu_id
     if gpu_id != None:
