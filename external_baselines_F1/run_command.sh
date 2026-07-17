@@ -149,24 +149,53 @@ python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 --N 50 --sample_steps
 
 # ============================================================
 # 八、进阶实验 — 邻接矩阵对比
-#    用途：验证不同空间建模策略对预测的影响
+#    用途：对比三种空间建模策略：距离图 / 相关图 / PE 图
 # ============================================================
+#
+# 【前置条件】确保以下文件存在，不在 git 里需单独传输：
+#   - matrix_N95/data.npy             O3 原始数据 (95, 8717)
+#   - DiffSTG/data/dataset/AIR_N95/flow.npy  已有，用于生成矩阵
+#   - DiffSTG/data/dataset/AIR_N95/adj.npy   距离矩阵（原版）
+#   - pip install scipy               prepare_alt_adj.py 的依赖
+#
+# 【操作步骤】按顺序执行，共 5 步
 
-# 先运行脚本生成两种新邻接矩阵
+# ---- 步骤 1：生成两种新邻接矩阵 ----
 cd "$PROJECT_ROOT"
 python external_baselines_F1/prepare_alt_adj.py
+# 输出：output/corr_adj.npy  ← Pearson 相关图
+#       output/pe_adj.npy    ← 排列熵相似度图
 
-# 8a. 相关图（Pearson 相关矩阵）
-#     手动将 output/corr_adj.npy 复制替换 data/dataset/AIR_N95/adj.npy
-python train.py \
-  --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+cd external_baselines_F1/DiffSTG
 
-# 8b. PE 图（排列熵相似度矩阵）
-#     手动将 output/pe_adj.npy 复制替换 data/dataset/AIR_N95/adj.npy
-python train.py \
-  --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+# ---- 步骤 2：备份原始距离矩阵 ----
+cp data/dataset/AIR_N95/adj.npy data/dataset/AIR_N95/adj_distance.npy
+# 这一步很重要！跑完才能恢复
+
+# ---- 步骤 3：相关图实验 ----
+cp "$PROJECT_ROOT/output/corr_adj.npy" data/dataset/AIR_N95/adj.npy
+# ↑ 替换为相关图
+python train.py --data AIR_N95 --T_h 24 --T_p 6 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+# 记录日志文件名，提取 test MAE/RMSE
+
+# ---- 步骤 4：PE 图实验 ----
+cp "$PROJECT_ROOT/output/pe_adj.npy" data/dataset/AIR_N95/adj.npy
+# ↑ 替换为 PE 图
+python train.py --data AIR_N95 --T_h 24 --T_p 6 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+
+# ---- 步骤 5：恢复原始矩阵 ----
+cp data/dataset/AIR_N95/adj_distance.npy data/dataset/AIR_N95/adj.npy
+
+# 【实验结果】
+# ┌─────────────────────────────────────────────────────────────┐
+# │ Adjacency     MAE      RMSE                                 │
+# │ Distance      34.50    41.10    ← 基准                      │
+# │ Correlation   35.86    42.11    ← 差 +1.36 / +1.01          │
+# │ PE            37.97    44.62    ← 差 +3.47 / +3.52          │
+# │                                                             │
+# │ 结论：三种矩阵差距极小（RMSE 最多差 3.5），瓶颈不在空间建模。│
+# │ 详见 results/adjacency_results.csv                          │
+# └─────────────────────────────────────────────────────────────┘
 
 
 # ============================================================
@@ -180,38 +209,66 @@ python external_baselines_F1/prepare_pm_data.py
 
 # 9a. PM2.5
 cd external_baselines_F1/DiffSTG
-python train.py \
-  --data AIR_N95_PM25 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+python train.py --data AIR_N95_PM25 --T_h 24 --T_p 6 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
 
 # 9b. PM10
-python train.py \
-  --data AIR_N95_PM10 --T_h 24 --T_p 6 --seed 42 \
-  --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+python train.py --data AIR_N95_PM10 --T_h 24 --T_p 6 --seed 42 --N 50 --sample_steps 50 --hidden_size 32 --batch_size 4 --n_samples 1
+
+# 【实验结果】
+# ┌─────────────────────────────────────────────────────────────┐
+# │ Pollutant  MAE      RMSE     MAPE       Data Range          │
+# │ O3         34.50    41.10    557.66%    [1, 410]            │
+# │ PM2.5      25.05    38.96    124.28%    [1, 543]            │
+# │ PM10       38.81    83.59     83.89%    [1, 2759]           │
+# │                                                             │
+# │ 结论：O3 最难（光化学反应），PM2.5 最易（更持久），         │
+# │ 三者在 F=1 下均显著弱于 PE-DiffWaveNet F=15。               │
+# │ 详见 results/single_target_results.csv                      │
+# └─────────────────────────────────────────────────────────────┘
 
 
 # ============================================================
 # 十、进阶实验 — 概率预测指标 & 置信区间图
-#    用途：展示 DiffSTG 的不确定性量化能力
+#    用途：展示扩散模型的不确定性量化能力
 # ============================================================
 
-# 不跑训练，从已有 forecast.pkl 提取：
-#   CRPS  = Continuous Ranked Probability Score（越低越好）
-#   MIS   = Mean Interval Score（越低越好）
-#   画置信区间阴影带（预测均值 ± 标准差）
+# 加载已保存模型做 multi-sample (n=50) 推理。
+# 约 300 batch × 50 samples ≈ 5 分钟。
+cd external_baselines_F1
+
+#O3 (pre_len=6)
+python compute_probability_metrics.py
+# 也可修改脚本内 DATA_NAME 跑其他污染物
+#例如：10b. PM2.5（改 DATA_NAME='AIR_N95_PM25' 后运行）
+# python compute_probability_metrics.py
+# 10c. PM10（改 DATA_NAME='AIR_N95_PM10' 后运行）
+# python compute_probability_metrics.py
+
+# 输出：
+#   probability_metrics.csv     CRPS + MIS(80%/90%/95%)
+#   figures/confidence_*.png    置信区间图
+
+# O3 结果（300 batch, n_samples=50）：
+# ┌─────────────────────────────────────────────────────────────┐
+# │ Experiment       CRPS    MIS_80   MIS_90   MIS_95           │
+# │ AIR_N95_p6      26.71   219.82   352.78   579.32            │
+# │                                                             │
+# │ CRPS ≈ 26.7 与 MAE=34.5 同一量级，概率估计合理但不够精准。   │
+# │ MIS 较高说明 F=1 下扩散模型不确定性很大——模型"知道自己不准"。 │
+# │ 此为扩散生成式模型的诚实不确定量化，论文章正面论述。         │
+# └─────────────────────────────────────────────────────────────┘
+
+
+# ============================================================
+# 十一、实验结果文件索引
+# ============================================================
+# results/baseline_results.csv         主对比（pre_len=6, 对齐 table1）
+# results/results.csv                  多步长衰减（1/3/6/12/24）
+# results/single_target_results.csv    三污染物对比
+# results/adjacency_results.csv        邻接矩阵对比
+# results/probability_metrics.csv      概率预测指标
+# results/README.md                    结果文件说明
 #
-# 每个实验的输出目录中包含 forecast.pkl，运行：
-cd "$PROJECT_ROOT"
-python external_baselines_F1/plot_probability_metrics.py
-#   → 输出各实验的 CRPS/MIS + 置信区间图到 external_baselines_F1/figures/
-
-
-# ============================================================
-# 十一、服务器运行注意事项
-# ============================================================
-# 1. 上传整个项目到服务器，保持目录结构不变
-# 2. 服务器环境：pip install torch easydict nni numpy pandas
-# 3. 首次运行：先跑 PEMS08 验证 → 生成 AIR_N95 数据 → 烟雾测试
-# 4. 服务器 GPU 显存充足时可加大 batch_size（16/32/64），加快训练
-# 5. 多条命令可用 && 串联或写 shell 脚本批量跑
-# 6. 每个实验结束后记录指标到 baseline_results.csv
+# figures/README.md                    完整图表说明 + 分析结论
+# plot_scripts/                        所有绘图脚本
+# compute_probability_metrics.py       概率指标计算脚本

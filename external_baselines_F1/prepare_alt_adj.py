@@ -11,6 +11,7 @@ Usage:
 
 生成后手动替换 data/dataset/AIR_N95/adj.npy 即可跑实验。
 """
+import math
 import numpy as np
 from pathlib import Path
 from scipy.stats import pearsonr
@@ -59,7 +60,7 @@ def permutation_entropy(ts, order=3, delay=1):
         patterns[pattern] += 1
     total = sum(patterns.values())
     pe = sum(-c/total * np.log(c/total) for c in patterns.values())
-    return pe / np.log(np.math.factorial(order))
+    return pe / math.log(math.factorial(order))
 
 pe_vals = np.array([permutation_entropy(data[i]) for i in range(n_stations)], dtype=np.float32)
 print(f'  PE 范围: [{pe_vals.min():.4f}, {pe_vals.max():.4f}]')
