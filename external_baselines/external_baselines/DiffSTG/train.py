@@ -72,6 +72,7 @@ def get_params():
     parser.add_argument("--nni", type=str2bool, default=False)
     parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument("--early_stop", type=int, default=10, help="early stop patience (epochs without improvement)")
 
     args, _ = parser.parse_known_args()
     return args
@@ -184,7 +185,7 @@ def default_config(data='AIR_BJ', params=None):
     config.lr = 1e-4
     config.batch_size = 32
     config.wd = 1e-5
-    config.early_stop = 10
+    config.early_stop = params.get('early_stop', 10) if params else 10
     config.start_epoch = 0
     config.device = device
     config.logger = Logger()
@@ -330,7 +331,7 @@ def main(params: dict):
     if config.model.sample_steps > config.model.N:
         print('sample steps large than N, exit')
         # nni.report_intermediate_result(50)
-        nni.report_final_result(50)
+        if config.nni: nni.report_final_result(50)
         return 0
 
 
@@ -496,7 +497,7 @@ def main(params: dict):
     except:
         pass
 
-    nni.report_final_result(min(metric_lst))
+    if config.nni: nni.report_final_result(min(metric_lst))
 
 
 # data.name	model	model.N	model.epsilon_theta	model.d_h	model.T_h	model.T_p	model.sample_strategy
@@ -504,19 +505,20 @@ def main(params: dict):
 
 if __name__ == '__main__':
 
-    import nni
     import logging
 
     logger = logging.getLogger('training')
 
     print('GPU:', torch.cuda.current_device())
     #print('CUDA available:', torch.cuda.is_available())
-    try:
-        tuner_params = nni.get_next_parameter()
-        logger.debug(tuner_params)
-        params = vars(get_params())
-        params.update(tuner_params)
-        main(params)
-    except Exception as exception:
-        logger.exception(exception)
-        raise
+    params = vars(get_params())
+    if params.get('nni', False):
+        import nni
+        try:
+            tuner_params = nni.get_next_parameter()
+            logger.debug(tuner_params)
+            params.update(tuner_params)
+        except Exception as exception:
+            logger.exception(exception)
+            raise
+    main(params)

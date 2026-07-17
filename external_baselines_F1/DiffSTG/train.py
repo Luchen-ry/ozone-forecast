@@ -7,6 +7,17 @@ import torch.utils.data
 from easydict import EasyDict as edict
 from timeit import default_timer as timer
 
+
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    if v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
 from utils.eval import Metric
 from utils.gpu_dispatch import GPU
 from utils.common_utils import dir_check, to_device, ws, unfold_dict, dict_merge, GpuId2CudaId, Logger
@@ -49,11 +60,11 @@ def get_params():
     parser.add_argument('--n_samples', type=int, default=8)
 
     # train
-    parser.add_argument("--is_train", type=bool, default=True) # train or evaluate
+    parser.add_argument("--is_train", type=str2bool, default=True) # train or evaluate
     parser.add_argument("--data", type=str, default='PEMS08')
     parser.add_argument("--mask_ratio", type=float, default=0.0) # mask of history data
-    parser.add_argument("--is_test", type=bool, default=False)
-    parser.add_argument("--nni", type=bool, default=False)
+    parser.add_argument("--is_test", type=str2bool, default=False)
+    parser.add_argument("--nni", type=str2bool, default=False)
     parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--batch_size", type=int, default=8)
 
@@ -159,7 +170,7 @@ def default_config(data='AIR_BJ'):
 
     # training config
     config.model_name = 'DiffSTG'
-    config.is_test = False  # Whether run the code in the test mode
+    # config.is_test controlled by command line --is_test (default False)
     config.epoch = 300  # Number of max training epoch
     config.optimizer = "adam"
     config.lr = 1e-4
@@ -302,7 +313,7 @@ def main(params: dict):
     if config.model.sample_steps > config.model.N:
         print('sample steps large than N, exit')
         # nni.report_intermediate_result(50)
-        nni.report_final_result(50)
+        if config.nni: nni.report_final_result(50)
         return 0
 
 
@@ -468,7 +479,7 @@ def main(params: dict):
     except:
         pass
 
-    nni.report_final_result(min(metric_lst))
+    if config.nni: nni.report_final_result(min(metric_lst))
 
 
 # data.name	model	model.N	model.epsilon_theta	model.d_h	model.T_h	model.T_p	model.sample_strategy
@@ -476,19 +487,20 @@ def main(params: dict):
 
 if __name__ == '__main__':
 
-    import nni
     import logging
 
     logger = logging.getLogger('training')
 
     print('GPU:', torch.cuda.current_device())
     #print('CUDA available:', torch.cuda.is_available())
-    try:
-        tuner_params = nni.get_next_parameter()
-        logger.debug(tuner_params)
-        params = vars(get_params())
-        params.update(tuner_params)
-        main(params)
-    except Exception as exception:
-        logger.exception(exception)
-        raise
+    params = vars(get_params())
+    if params.get('nni', False):
+        import nni
+        try:
+            tuner_params = nni.get_next_parameter()
+            logger.debug(tuner_params)
+            params.update(tuner_params)
+        except Exception as exception:
+            logger.exception(exception)
+            raise
+    main(params)

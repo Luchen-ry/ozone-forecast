@@ -1,6 +1,8 @@
 Method,RMSE,MAE,MAPE,Peak_RMSE,Step6_RMSE,Source
-"DiffSTG (pre_len=1, F=1)",13.08,9.61,122.21,N/A,N/A,our reproduction seed42
-"DiffSTG (pre_len=3, F=1)",32.42,26.60,426.64,N/A,N/A,our reproduction seed42
-"DiffSTG (pre_len=6, F=1)",41.10,34.50,557.66,N/A,43.1,our reproduction seed42
-"DiffSTG (pre_len=12, F=1)",45.70,39.10,636.65,N/A,N/A,our reproduction seed42
-"DiffSTG (pre_len=24, F=1)",48.65,41.89,676.79,N/A,N/A,our reproduction seed42
+"DiffSTG (pre_len=1, F=1)",13.08,9.61,122.21,N/A,N/A,teammate seed42 (101 epochs, bs=4)
+"DiffSTG (pre_len=3, F=1)",32.42,26.60,426.64,N/A,N/A,teammate seed42 (33 epochs, bs=4)
+"DiffSTG (pre_len=6, F=1)",35.74,29.20,469.99,N/A,35.74,mine seed42 (194 epochs, bs=4, best of both)
+"DiffSTG (pre_len=12, F=1)",43.97,37.59,616.87,N/A,N/A,mine seed42 (18 epochs, bs=4)
+"DiffSTG (pre_len=24, F=1)",47.22,40.61,662.97,N/A,N/A,mine seed42 (23 epochs, bs=4)
+"DiffSTG (pre_len=6, F=1, corr_adj)",42.11,35.86,567.52,N/A,N/A,alt-adj seed42 (corr_adj) best_epoch=2
+"DiffSTG (pre_len=6, F=1, pe_adj)",44.62,37.97,605.83,N/A,N/A,alt-adj seed42 (pe_adj) best_epoch=5

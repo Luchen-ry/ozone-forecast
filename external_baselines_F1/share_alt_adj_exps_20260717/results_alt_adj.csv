@@ -1,0 +1,2 @@
+"DiffSTG (pre_len=6, F=1, corr_adj)",42.11,35.86,567.52,N/A,N/A,alt-adj seed42 (corr_adj) best_epoch=2
+"DiffSTG (pre_len=6, F=1, pe_adj)",44.62,37.97,605.83,N/A,N/A,alt-adj seed42 (pe_adj) best_epoch=5

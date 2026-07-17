@@ -1,6 +1,6 @@
-{'PATH_MOD': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/output/model/', 'PATH_LOG': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/output/log/', 'PATH_FORECAST': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/output/forecast/', 'data': {'name': 'AIR_N95', 'path': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/data/dataset/', 'feature_file': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/data/dataset/AIR_N95/flow.npy', 'spatial': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/data/dataset/AIR_N95/adj.npy', 'num_recent': 1, 'num_features': 1, 'num_vertices': 95, 'points_per_hour': 1, 'val_start_idx': 5230, 'test_start_idx': 6973}, 'gpu_id': None, 'model': {'T_p': 1, 'T_h': 24, 'V': 95, 'F': 1, 'week_len': 7, 'day_len': 24, 'device': device(type='cuda'), 'd_h': 32, 'N': 50, 'sample_steps': 50, 'epsilon_theta': 'UGnet', 'is_label_condition': True, 'beta_end': 0.1, 'beta_schedule': 'quad', 'sample_strategy': 'ddpm', 'channel_multipliers': [1, 2], 'supports_len': 2, 'C': 32, 'n_channels': 32}, 'n_samples': 1, 'model_name': 'DiffSTG', 'is_test': False, 'epoch': 300, 'optimizer': 'adam', 'lr': 0.002, 'batch_size': 4, 'wd': 1e-05, 'early_stop': 10, 'start_epoch': 0, 'device': device(type='cuda'), 'logger': <utils.common_utils.Logger object at 0x00000173FFEF6ED0>, 'nni': False, 'mask_ratio': 0.0, 'T_h': 24, 'T_p': 1, 'trial_name': 'UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4', 'log_path': 'D:\\生产实习-时空数据\\臭氧预测资料\\external_baselines\\DiffSTG/output/log//UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4.log'}
-model path:D:\生产实习-时空数据\臭氧预测资料\external_baselines\DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-1+epsilon_theta-UGnet.dm4stg
-forecast_path:D:\生产实习-时空数据\臭氧预测资料\external_baselines\DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-1+epsilon_theta-UGnet.dm4stg
+{'PATH_MOD': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/model/', 'PATH_LOG': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/log/', 'PATH_FORECAST': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/forecast/', 'data': {'name': 'AIR_N95', 'path': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/data/dataset/', 'feature_file': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/data/dataset/AIR_N95/flow.npy', 'spatial': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/data/dataset/AIR_N95/adj.npy', 'num_recent': 1, 'num_features': 1, 'num_vertices': 95, 'points_per_hour': 1, 'val_start_idx': 5230, 'test_start_idx': 6973}, 'gpu_id': None, 'model': {'T_p': 1, 'T_h': 24, 'V': 95, 'F': 1, 'week_len': 7, 'day_len': 24, 'device': device(type='cuda'), 'd_h': 32, 'N': 50, 'sample_steps': 50, 'epsilon_theta': 'UGnet', 'is_label_condition': True, 'beta_end': 0.1, 'beta_schedule': 'quad', 'sample_strategy': 'ddpm', 'channel_multipliers': [1, 2], 'supports_len': 2, 'C': 32, 'n_channels': 32}, 'n_samples': 1, 'model_name': 'DiffSTG', 'epoch': 300, 'optimizer': 'adam', 'lr': 0.002, 'batch_size': 4, 'wd': 1e-05, 'early_stop': 10, 'start_epoch': 0, 'device': device(type='cuda'), 'logger': <utils.common_utils.Logger object at 0x78c44c447e00>, 'is_test': False, 'nni': False, 'mask_ratio': 0.0, 'T_h': 24, 'T_p': 1, 'trial_name': 'UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4', 'log_path': '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/log//UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4.log'}
+model path:/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-1+epsilon_theta-UGnet.dm4stg
+forecast_path:/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/model/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4N-50+T_h-24+T_p-1+epsilon_theta-UGnet.dm4stg
 DiffSTG(
   (eps_model): UGnet(
     (down): ModuleList(
@@ -29,7 +29,7 @@ DiffSTG(
           (shortcut): Identity()
           (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
       (2): Downsample(
@@ -61,7 +61,7 @@ DiffSTG(
           (shortcut): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
           (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
       (4): DownBlock(
@@ -89,7 +89,7 @@ DiffSTG(
           (shortcut): Identity()
           (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
     )
@@ -118,7 +118,7 @@ DiffSTG(
         (shortcut): Identity()
         (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
         (spatial): SpatialBlock()
-        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True, bias=True)
       )
       (res2): ResidualBlock(
         (tcn1): TcnBlock(
@@ -144,7 +144,7 @@ DiffSTG(
         (shortcut): Identity()
         (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
         (spatial): SpatialBlock()
-        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+        (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True, bias=True)
       )
     )
     (up): ModuleList(
@@ -174,7 +174,7 @@ DiffSTG(
           (shortcut): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
           (t_conv): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 64), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
       (2): UpBlock(
@@ -203,7 +203,7 @@ DiffSTG(
           (shortcut): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
           (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
       (3): Upsample(
@@ -235,7 +235,7 @@ DiffSTG(
           (shortcut): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
           (t_conv): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
           (spatial): SpatialBlock()
-          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True)
+          (norm): LayerNorm((95, 32), eps=1e-05, elementwise_affine=True, bias=True)
         )
       )
     )
@@ -248,107 +248,21 @@ DiffSTG(
 )Num_of_parameters:910492
       |---Train--- |---Val Future-- -|-----Val History----|
 Epoch | Loss  Time | MAE     RMSE    |  MAE    RMSE   Time|
-   1.0| 2.262 85.1s |[16.99  21.64  ] | 4.06   4.87   371.42s
-   2.0| 0.741 81.7s |[14.75  19.11  ] | 5.01   5.90   373.48s
-   3.0| 0.672 81.5s | 15.77  20.36   | 5.11   6.06   369.66s
-   4.0| 0.599 86.0s | 15.12  19.53   | 2.25   2.73   315.00s
-   5.0| 0.510 70.1s | 18.83  24.38   | 2.68   3.19   314.34s
-   6.0| 0.442 75.3s | 18.93  24.63   | 2.20   2.64   319.46s
-   7.0| 0.409 70.4s | 16.95  22.09   | 3.46   4.11   315.13s
-   8.0| 0.430 76.9s | 19.15  24.59   | 2.01   2.43   316.96s
-   9.0| 0.290 70.6s | 16.25  21.43   | 0.95   1.17   329.52s
-  10.0| 0.296 75.3s | 15.53  20.58   | 0.87   1.09   323.96s
-  11.0| 0.261 70.1s | 14.83  19.64   | 0.77   0.97   314.31s
-  12.0| 0.256 70.3s | 14.80  19.57   | 0.72   0.92   314.14s
-  13.0| 0.247 68.9s |[14.40  19.13  ] | 0.66   0.85   328.09s
-  14.0| 0.242 75.6s | 14.68  19.45   | 0.68   0.88   330.40s
-  15.0| 0.238 75.7s |[13.94  18.49  ] | 0.68   0.88   329.63s
-  16.0| 0.235 69.1s | 14.04  18.66   | 0.68   0.88   314.02s
-  17.0| 0.231 69.3s |[13.89  18.54  ] | 0.66   0.86   314.03s
-  18.0| 0.239 75.6s | 13.90  18.56   | 0.70   0.89   330.49s
-  19.0| 0.227 75.9s | 14.21  18.88   | 0.70   0.90   318.89s
-  20.0| 0.218 69.2s |[13.02  17.48  ] | 0.64   0.82   331.49s
-  21.0| 0.217 75.6s | 13.44  18.08   | 0.70   0.89   322.82s
-  22.0| 0.214 73.1s | 13.42  17.85   | 0.67   0.88   313.31s
-  23.0| 0.217 73.3s | 13.23  17.71   | 0.63   0.82   307.15s
-  24.0| 0.212 70.8s | 13.55  18.33   | 0.71   0.93   309.37s
-  25.0| 0.209 69.2s |[12.63  16.99  ] | 0.69   0.88   315.97s
-  26.0| 0.204 70.0s | 13.16  17.71   | 0.64   0.81   321.49s
-  27.0| 0.200 76.0s | 13.28  17.89   | 0.59   0.77   317.05s
-  28.0| 0.201 69.8s | 13.19  17.95   | 0.67   0.86   314.08s
-  29.0| 0.200 71.5s | 13.43  18.12   | 0.69   0.89   330.25s
-  30.0| 0.195 75.1s | 13.05  17.59   | 0.64   0.82   321.37s
-  31.0| 0.191 70.1s | 13.06  17.63   | 0.70   0.88   313.87s
-  32.0| 0.150 69.1s |[12.42  16.95  ] | 0.50   0.64   313.98s
-  33.0| 0.148 74.2s | 12.67  17.30   | 0.51   0.66   332.29s
-  34.0| 0.144 75.5s | 12.47  17.00   | 0.51   0.66   317.74s
-  35.0| 0.144 73.8s |[12.41  16.97  ] | 0.49   0.63   327.01s
-  36.0| 0.142 72.8s |[12.40  16.94  ] | 0.49   0.63   316.71s
-  37.0| 0.145 75.6s |[12.40  16.86  ] | 0.48   0.61   321.09s
-  38.0| 0.139 73.2s |[12.25  16.71  ] | 0.49   0.63   314.09s
-  39.0| 0.136 69.2s | 12.53  16.99   | 0.49   0.63   314.45s
-  40.0| 0.137 69.4s | 12.66  17.01   | 0.50   0.64   318.53s
-  41.0| 0.136 75.6s | 12.53  17.04   | 0.50   0.63   330.84s
-  42.0| 0.134 75.8s | 12.34  16.80   | 0.48   0.61   322.60s
-  43.0| 0.133 69.2s | 12.33  16.83   | 0.48   0.62   313.87s
-  44.0| 0.131 71.4s | 12.32  16.74   | 0.49   0.63   314.37s
-  45.0| 0.115 72.1s |[11.83  16.24  ] | 0.45   0.57   314.44s
-  46.0| 0.112 72.1s |[11.81  16.24  ] | 0.45   0.57   347.57s
-  47.0| 0.110 69.1s |[11.80  16.21  ] | 0.45   0.56   313.61s
-  48.0| 0.108 71.6s |[11.75  16.17  ] | 0.44   0.56   330.72s
-  49.0| 0.107 75.7s |[11.73  16.11  ] | 0.44   0.56   321.15s
-  50.0| 0.107 73.0s |[11.71  16.10  ] | 0.44   0.56   313.60s
-  51.0| 0.105 73.3s | 11.72  16.12   | 0.44   0.55   314.49s
-  52.0| 0.105 69.2s |[11.69  16.08  ] | 0.44   0.56   313.96s
-  53.0| 0.104 69.1s | 11.70  16.06   | 0.44   0.56   313.92s
-  54.0| 0.104 68.9s | 11.71  16.09   | 0.44   0.56   316.35s
-  55.0| 0.103 71.1s | 11.72  16.12   | 0.44   0.56   315.00s
-  56.0| 0.101 70.9s |[11.63  16.00  ] | 0.44   0.56   314.89s
-  57.0| 0.103 84.1s | 11.65  16.01   | 0.44   0.55   321.09s
-  58.0| 0.100 73.2s | 11.66  16.02   | 0.44   0.56   315.73s
-  59.0| 0.102 73.1s |[11.52  15.84  ] | 0.44   0.55   314.90s
-  60.0| 0.099 73.4s | 11.59  15.95   | 0.43   0.55   314.80s
-  61.0| 0.099 73.7s | 11.59  15.98   | 0.44   0.56   315.74s
-  62.0| 0.098 74.2s |[11.51  15.86  ] | 0.43   0.55   314.57s
-  63.0| 0.096 73.1s | 11.55  15.91   | 0.44   0.56   314.69s
-  64.0| 0.098 72.0s | 11.52  15.87   | 0.44   0.56   314.66s
-  65.0| 0.096 71.9s | 11.64  16.02   | 0.43   0.55   314.38s
-  66.0| 0.090 71.8s |[11.40  15.75  ] | 0.43   0.54   314.61s
-  67.0| 0.089 72.0s |[11.35  15.69  ] | 0.43   0.54   315.58s
-  68.0| 0.088 73.5s |[11.33  15.67  ] | 0.43   0.54   314.61s
-  69.0| 0.087 72.4s | 11.34  15.69   | 0.43   0.54   314.83s
-  70.0| 0.086 72.5s |[11.29  15.64  ] | 0.43   0.54   319.17s
-  71.0| 0.086 72.4s | 11.30  15.66   | 0.43   0.54   314.43s
-  72.0| 0.085 72.0s | 11.34  15.70   | 0.42   0.53   314.57s
-  73.0| 0.085 72.1s | 11.30  15.65   | 0.43   0.54   314.47s
-  74.0| 0.084 72.0s | 11.33  15.69   | 0.42   0.53   314.48s
-  75.0| 0.084 72.2s | 11.31  15.67   | 0.43   0.54   315.01s
-  76.0| 0.083 75.8s | 11.32  15.68   | 0.43   0.54   314.37s
-  77.0| 0.083 72.3s |[11.28  15.66  ] | 0.42   0.53   314.92s
-  78.0| 0.082 72.4s |[11.26  15.65  ] | 0.42   0.53   314.97s
-  79.0| 0.081 68.9s |[11.26  15.65  ] | 0.42   0.53   314.64s
-  80.0| 0.081 68.7s |[11.25  15.64  ] | 0.42   0.53   313.98s
-  81.0| 0.081 68.7s | 11.26  15.65   | 0.42   0.53   314.15s
-  82.0| 0.080 69.7s | 11.27  15.66   | 0.42   0.53   316.14s
-  83.0| 0.080 69.0s |[11.25  15.65  ] | 0.42   0.53   314.56s
-  84.0| 0.079 69.0s | 11.25  15.65   | 0.42   0.53   314.49s
-  85.0| 0.079 68.9s |[11.25  15.65  ] | 0.42   0.53   314.24s
-  86.0| 0.079 69.0s |[11.25  15.64  ] | 0.42   0.53   314.47s
-  87.0| 0.079 70.2s | 11.25  15.66   | 0.42   0.53   314.53s
-  88.0| 0.078 68.8s | 11.26  15.66   | 0.42   0.53   314.44s
-  89.0| 0.078 68.8s | 11.25  15.65   | 0.42   0.53   314.46s
-  90.0| 0.078 69.3s |[11.25  15.65  ] | 0.42   0.53   314.21s
-  91.0| 0.078 68.9s | 11.26  15.66   | 0.42   0.53   314.50s
-  92.0| 0.077 68.9s | 11.25  15.66   | 0.42   0.53   314.83s
-  93.0| 0.078 68.9s | 11.31  15.70   | 0.42   0.53   314.52s
-  94.0| 0.078 69.0s | 11.30  15.70   | 0.42   0.53   314.50s
-  95.0| 0.077 68.9s | 11.30  15.69   | 0.42   0.53   314.43s
-  96.0| 0.077 68.9s | 11.30  15.70   | 0.42   0.53   362.42s
-  97.0| 0.077 81.9s | 11.30  15.70   | 0.42   0.53   373.75s
-  98.0| 0.077 81.4s | 11.30  15.70   | 0.42   0.53   374.37s
-  99.0| 0.078 84.4s | 11.35  15.73   | 0.42   0.53   376.02s
- 100.0| 0.078 86.2s | 11.34  15.73   | 0.42   0.53   376.48s
- 101.0| 0.077 81.5s | 11.34  15.72   | 0.42   0.53   376.41s
-predict_path = 'D:\生产实习-时空数据\臭氧预测资料\external_baselines\DiffSTG/output/forecast/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4.pkl'
- |[9.61   13.08  ] | 0.11   0.16   309.72s
-sample_strategy:ddim_multi, sample_steps:40 Final results in test:9.61   13.08  122.21 0.27    384.51  | 101  
+   1.0| 2.257 73.1s |[18.24  22.79  ] | 4.74   5.72   44.69s
+   2.0| 0.737 76.2s |[14.02  18.55  ] | 4.85   5.67   44.63s
+   3.0| 0.720 76.4s | 14.37  18.72   | 2.31   2.76   44.64s
+   4.0| 0.619 75.9s |[13.58  17.89  ] | 2.31   2.75   44.64s
+   5.0| 0.558 75.9s | 14.02  18.56   | 1.92   2.32   44.63s
+   6.0| 0.520 77.2s | 14.25  18.61   | 2.02   2.39   44.63s
+   7.0| 0.474 77.1s | 14.54  19.13   | 2.05   2.41   44.59s
+   8.0| 0.447 77.7s | 16.74  21.93   | 2.03   2.39   44.63s
+   9.0| 0.423 77.5s | 16.07  20.85   | 1.81   2.14   44.63s
+  10.0| 0.395 76.5s | 15.85  20.61   | 1.30   1.62   44.63s
+  11.0| 0.300 76.0s | 15.21  19.98   | 0.88   1.14   44.62s
+  12.0| 0.288 73.3s | 15.21  20.01   | 0.85   1.10   44.63s
+  13.0| 0.280 72.9s | 15.40  20.34   | 0.80   1.04   44.64s
+  14.0| 0.272 76.2s | 15.22  20.19   | 0.84   1.09   44.68s
+  15.0| 0.266 39.0s | 14.99  20.02   | 0.80   1.02   44.62s
+predict_path = '/home/cl/ozone-forecast/external_baselines_F1/DiffSTG/output/forecast/UGnet+32+50+quad+0.1+50+ddpm+24+1+42+1+True+AIR_N95+0.0+False+False+0.002+4.pkl'
+ |[12.68  15.57  ] | 5.44   5.88   37.45s
+sample_strategy:ddim_multi, sample_steps:40 Final results in test:12.68  15.57  184.12 0.35    507.29  | 15   
