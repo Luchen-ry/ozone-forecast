@@ -1,0 +1,6 @@
+pre_len,RMSE,MAE,MAPE(%),Step6_RMSE,best_epoch,source,notes
+1,12.96,10.46,123.53,,51,cl rerun,F=15 noleak; lr=0.001 es=30; replaced old (18.86/21.38, 13 epochs)
+3,22.89,17.86,222.08,,237,cl rerun,F=15 noleak; lr=0.001 es=30; replaced old (21.15/25.15, 15 epochs)
+6,31.55,24.83,350.40,31.55,196,cl rerun,F=15 noleak; lr=0.001 es=30; replaced old (26.32/32.06, 12 epochs)
+12,39.82,33.30,473.76,,33,cl rerun,F=15 noleak; lr=0.001 es=30; replaced old (36.15/42.39, 12 epochs)
+24,33.52,27.11,406.30,33.52,46,cl original,F=15 noleak; original kept (training sufficient)

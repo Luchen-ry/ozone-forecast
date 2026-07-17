@@ -1,0 +1,6 @@
+pre_len,RMSE,MAE,MAPE(%),Step6_RMSE,best_epoch,source,notes
+1,13.08,9.61,122.21,,101,teammate,F=1 default 0.6/0.8 split; best of teammate+mine
+3,32.42,26.60,426.64,,33,teammate,F=1; best of teammate+mine
+6,35.74,29.20,469.99,35.74,194,mine,F=1; 194 epochs; best of teammate+mine (teammate: 41.10/34.50)
+12,43.97,37.59,616.87,,18,mine,F=1; 18 epochs early stop; best of teammate+mine
+24,47.22,40.61,662.97,,23,mine,F=1; 23 epochs early stop; best of teammate+mine

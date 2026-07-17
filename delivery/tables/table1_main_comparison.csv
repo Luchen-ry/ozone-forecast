@@ -1,0 +1,7 @@
+Model,seq_len,pre_len,seed,RMSE,MAE,MAPE(%),Peak_RMSE,Step6_RMSE,Notes
+PE-DiffWaveNet (F=15),24,6,42,11.24,7.91,31.89,14.15,13.92,main
+PE-DiffWaveNet (F=15),24,6,52,11.13,7.98,32.39,13.83,13.73,multi-seed
+PE-DiffWaveNet (F=15),24,6,62,11.51,8.17,32.56,13.26,13.97,multi-seed
+PE-DiffWaveNet (mean±std),24,6,-,11.29±0.16,8.02±0.12,32.28±0.29,13.75±0.37,13.87±0.12,3 seeds
+DiffSTG (F=1, default split),24,6,42,35.74,29.20,469.99,,35.74,best of teammate(41.10/34.50)+mine(35.74/29.20)
+DiffSTG (F=15, noleak rerun),24,6,42,31.55,24.83,350.40,,31.55,lr=0.001 es=30; 196 epochs

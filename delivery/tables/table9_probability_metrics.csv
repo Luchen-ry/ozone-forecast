@@ -1,0 +1,2 @@
+Experiment,CRPS,MIS_80,MIS_90,MIS_95,Notes
+AIR_N95_p6 (O3, F=1),26.7107,219.8206,352.7771,579.3178,50 samples inference; same magnitude as MAE=34.50; MIS high due to F=1 info insufficiency

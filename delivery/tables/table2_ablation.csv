@@ -1,0 +1,6 @@
+Configuration,use_diffusion,use_pe_graph,use_pe_film,pe_shuffle,RMSE,MAE,MAPE(%),Peak_RMSE,ΔRMSE(%)
+Full Model (PE-DiffWaveNet),1,1,1,-1,11.24,7.91,31.89,14.15,+0.0%
+No Diffusion,0,1,1,-1,10.93,7.58,29.90,14.97,-2.8%
+No PE Graph,1,0,1,-1,11.33,7.95,31.89,13.40,+0.8%
+No PE FiLM,1,1,0,-1,13.84,10.61,43.99,13.34,+23.1%
+PE Shuffle (seed=52),1,1,1,52,12.49,9.55,43.29,11.61,+11.2%
