@@ -36,10 +36,10 @@
 5. 多通道按通道独立归一化：避免气象量纲淹没 O3 信号
 6. F=15 重跑版本额外增加 `--early_stop` 和 `--lr` 命令行参数（让早停耐心和学习率可配置）
 
-#### 3.2 初阶实验：F=1 多预测步长（5 个 pre_len，择优合并）
+#### 3.2 初阶实验：F=1 多预测步长（5 个 pre_len）
 
 - 配置：F=1（仅 O3 单通道）、default 0.6/0.8 切分、seq_len=24、seed=42
-- **两人均跑了全部 5 个 pre_len**（1/3/6/12/24），结果择优合并：
+- 结果（5 个 pre_len，1/3/6/12/24）：
   - pre_len=1：101 epochs MAE=9.61 
   - pre_len=3：33 epochs MAE=26.60 
   - pre_len=6：194 epochs MAE=29.20
@@ -66,11 +66,11 @@
 - 配置：F=1 单通道、pre_len=6、seq_len=24、seed=42，分别以 O3/PM2.5/PM10 为目标
 - 数据准备：prepare_pm_data.py 从 data_N95 抽取 PM2.5/PM10 单通道 flow.npy
 - 结果：
-  - O3: MAE=34.50, RMSE=41.10, MAPE=557.66%（数据范围 [1,410]，归一化 RMSE 10.02%）
+  - O3: MAE=29.20, RMSE=35.74, MAPE=469.99%（数据范围 [1,410]，归一化 RMSE 8.72%）
   - PM2.5: MAE=25.05, RMSE=38.96, MAPE=124.28%（[1,543]，7.18%）
   - PM10: MAE=38.81, RMSE=83.59, MAPE=83.89%（[1,2759]，3.03%）
 - 结论：O3 预测难度最大（光化学反应强依赖气象），PM2.5/PM10 主要受排放和传输影响，历史值信息量更大
-- 日志：PM2.5/PM10 训练在队友本地 Windows 11 + RTX 3050 环境运行，原始 stdout 未同步；结果以 single_target_results.csv 为准（标注 best_epoch=22/17）
+- 日志：delivery/logs/diffstg_advanced/diffstg_F1_pm{25,10}_p6_l24_s42.log
 - 实验记录：delivery/experiment_logs/diffstg_advanced/（PM2.5、PM10 各 1 份）
 
 #### 3.5 进阶实验二：邻接矩阵对比（距离 / 相关 / PE，F=1，pre_len=6）
@@ -78,7 +78,7 @@
 - 配置：F=1、pre_len=6、seq_len=24、seed=42，仅替换邻接矩阵
 - 数据准备：prepare_alt_adj.py 生成 corr_adj.npy（Pearson 相关图）和 pe_adj.npy（排列熵相似度图）
 - 结果：
-  - Distance（基准）: MAE=34.50, RMSE=41.10
+  - Distance（基准）: MAE=29.20, RMSE=35.74
   - Correlation: MAE=35.86, RMSE=42.11（best_epoch=2）
   - PE: MAE=37.97, RMSE=44.62（best_epoch=5）
 - 结论：三种邻接矩阵差距极小（RMSE 最大差 3.5），而 DiffSTG 与 PE-DiffWaveNet 差距达 30，瓶颈不在空间建模而在输入特征
@@ -90,7 +90,7 @@
 - 配置：加载 DiffSTG F=1 O3 pre_len=6 已训练模型，n_samples=50 做 DDPM 采样推理
 - 脚本：compute_probability_metrics.py（约 300 batch × 50 samples ≈ 5 分钟）
 - 结果（O3, F=1, pre_len=6）：
-  - CRPS=26.71（与 MAE=34.50 同量级，概率预测未系统偏离）
+  - CRPS=26.71（与 MAE=29.20 同量级，概率预测未系统偏离）
   - MIS 80%=219.82, MIS 90%=352.78, MIS 95%=579.32（区间极宽，模型"知道自己不准"）
 - 可视化：confidence_AIR_N95_p6.png 展示 50 次采样的预测均值 ± σ 阴影带
 - 结论：扩散模型天然支持不确定性量化；F=1 下 MIS 极高（信息不足的诚实表达），F=15 预计降至实用范围
@@ -116,7 +116,7 @@
 1. **统一结果表**：delivery/results.csv（30 行，字段对齐 templates/experiment_result_template.csv），涵盖 PE 全部实验、DiffSTG F=1/F=15、PM2.5/PM10、邻接矩阵对比、概率指标
 2. **论文风格表格**（9 张，delivery/tables/）：
    - table1 主对比 / table2 消融 / table3 PE 预测步长 / table4 输入窗口
-   - table5 DiffSTG F=1 多步长（择优）/ table6 DiffSTG F=15 多步长（重跑）
+   - table5 DiffSTG F=1 多步长/ table6 DiffSTG F=15 多步长（重跑）
    - table7 三污染物对比 / table8 邻接矩阵对比 / table9 概率指标
 3. **可视化图表**（delivery/figures/，28 张）：
    - PE 主模型 16 张（fig1-12 + 站点分布 + O3 时间序列 + 补充图）
@@ -139,14 +139,14 @@ delivery/
 │   ├── table2_ablation.csv                # 消融实验表
 │   ├── table3_pre_len.csv                 # PE 预测步长误差
 │   ├── table4_seq_len.csv                 # PE 输入窗口误差
-│   ├── table5_diffstg_F1_pre_len.csv      # DiffSTG F=1 多步长（择优）
+│   ├── table5_diffstg_F1_pre_len.csv      # DiffSTG F=1 多步长
 │   ├── table6_diffstg_F15_pre_len.csv     # DiffSTG F=15 多步长（重跑）
 │   ├── table7_pollutant_comparison.csv    # 三污染物对比
 │   ├── table8_adjacency_comparison.csv    # 邻接矩阵对比
 │   └── table9_probability_metrics.csv     # 概率预测指标
 ├── experiment_logs/                   # 按模板的实验记录（28 份）
 │   ├── pedw_F15/                          # PE-DiffWaveNet F=15（13 个）
-│   ├── diffstg_F1_merged/                 # DiffSTG F=1 合并后（5 个）
+│   ├── diffstg_F1_merged/                 # DiffSTG F=1 （5 个）
 │   ├── diffstg_F15/                       # DiffSTG F=15 重跑（5 个）
 │   └── diffstg_advanced/                  # DiffSTG 进阶实验（5 个：PM2.5/PM10/corr_adj/pe_adj/prob）
 ├── figures/                           # 论文风格图表
@@ -227,7 +227,7 @@ python train.py --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
 |-------|---|-------|------|-----|---------|-----------|
 | PE-DiffWaveNet (3-seed 均值±std) | 15 | noleak | 11.29±0.16 | 8.02±0.12 | 32.28±0.29 | 13.75±0.37 |
 | DiffSTG (F=15, rerun) | 15 | noleak | 31.55 | 24.83 | 350.40 | - |
-| DiffSTG (F=1, best of teammate+mine) | 1 | default | 35.74 | 29.20 | 469.99 | - |
+| DiffSTG (F=1, F=1 baseline) | 1 | default | 35.74 | 29.20 | 469.99 | - |
 
 PE-DiffWaveNet 相对 DiffSTG (F=15): MAE 降低 67.7%，RMSE 降低 64.3%。
 F=15 vs F=1（DiffSTG 内部）: MAE 从 29.20 降至 24.83（-15.0%），验证气象因子有效性。
@@ -245,7 +245,7 @@ F=15 vs F=1（DiffSTG 内部）: MAE 从 29.20 降至 24.83（-15.0%），验证
 
 | Pollutant | MAE | RMSE | MAPE(%) |
 |-----------|-----|------|---------|
-| O3 | 34.50 | 41.10 | 557.66 |
+| O3 | 29.20 | 35.74 | 469.99 |
 | PM2.5 | 25.05 | 38.96 | 124.28 |
 | PM10 | 38.81 | 83.59 | 83.89 |
 

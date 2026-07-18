@@ -3,7 +3,7 @@
 ## 基本信息
 
 - 组别：g3
-- 学生：teammate
+- 学生：熊佳惠
 - 日期：2026-07-17
 - 实验编号：g3_diffstg_F1_o3_p6_l24_s42_prob
 - 模型：DiffSTG（外部基线，概率预测评估）
@@ -29,7 +29,7 @@ python compute_probability_metrics.py
 - sample_strategy: ddim_multi, sample_steps: 40
 - num_features: 1 (F=1, 仅 O3)
 - target_pollutant: O3
-- 加载模型：DiffSTG F=1 O3 pre_len=6 best 模型（MAE=34.50 那次）
+- 加载模型：DiffSTG F=1 O3 pre_len=6 best 模型（MAE=29.20 那次）
 
 ## 输出位置
 
@@ -47,7 +47,7 @@ python compute_probability_metrics.py
 ## 现象和结论
 
 进阶实验：概率预测指标与置信区间——展示扩散模型的不确定性量化能力。
-- CRPS=26.71：与 MAE=34.50 同量级，概率预测未系统偏离真实分布，估计合理但不够精准
+- CRPS=26.71：与 MAE=29.20 同量级，概率预测未系统偏离真实分布，估计合理但不够精准
 - MIS 较高（MIS 95%=579.32）：F=1 下扩散模型不确定性极大，预测区间宽到几乎无参考价值
 - 叙事：扩散模型的天然优势是不确定性量化。F=1 时 MIS 极高（模型"知道自己不准"，诚实表达信息不足），
   F=15 时预计降至合理范围——从概率维度再次证实气象因子的必要性

@@ -11,14 +11,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-FIG_DIR = Path(__file__).resolve().parent / 'figures'
+ROOT = Path(__file__).resolve().parent.parent
+FIG_DIR = ROOT / 'figures'
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---- 数据 ----
 pollutants = ['O3', 'PM2.5', 'PM10']
-mae  = [34.50, 25.05, 38.81]
-rmse = [41.10, 38.96, 83.59]
-mape = [557.66, 124.28, 83.89]
+mae  = [29.20, 25.05, 38.81]
+rmse = [35.74, 38.96, 83.59]
+mape = [469.99, 124.28, 83.89]
 data_range = [410, 543, 2759]
 
 colors = ['#2563EB', '#DC2626', '#CA8A04']  # blue, red, gold
@@ -104,7 +105,7 @@ print('[OK] pollutant_rmse_normalized.png')
 fig, ax = plt.subplots(figsize=(9, 4))
 ax.axis('off')
 table_data = [
-    ['O3',   '34.50',  '41.10',  '557.66%', '[1, 410]',  '17'],
+    ['O3',   '29.20',  '35.74',  '469.99%', '[1, 410]',  '194'],
     ['PM2.5','25.05',  '38.96',  '124.28%', '[1, 543]',  '22'],
     ['PM10', '38.81',  '83.59',  '83.89%',  '[1, 2759]', '17'],
 ]

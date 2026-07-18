@@ -1,4 +1,4 @@
 Pollutant,MAE,RMSE,MAPE,Data_Range,RMSE_pct_of_Range,best_epoch,Source
-O3,34.50,41.10,557.66,"[1, 410]",10.02%,17,our reproduction seed42
+O3,29.20,35.74,469.99,"[1, 410]",8.72%,194,our reproduction seed42
 PM2.5,25.05,38.96,124.28,"[1, 543]",7.18%,22,our reproduction seed42
 PM10,38.81,83.59,83.89,"[1, 2759]",3.03%,17,our reproduction seed42

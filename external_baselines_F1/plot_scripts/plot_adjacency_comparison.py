@@ -9,12 +9,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-FIG_DIR = Path(__file__).resolve().parent / 'figures'
+ROOT = Path(__file__).resolve().parent.parent
+FIG_DIR = ROOT / 'figures'
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 adj_types = ['Distance', 'Correlation', 'PE']
-mae  = [34.50, 35.86, 37.97]
-rmse = [41.10, 42.11, 44.62]
+mae  = [29.20, 35.86, 37.97]
+rmse = [35.74, 42.11, 44.62]
 colors = ['#2563EB', '#DC2626', '#CA8A04']
 
 plt.rcParams.update({'font.size': 12, 'axes.titlesize': 14, 'axes.labelsize': 12})

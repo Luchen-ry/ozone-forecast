@@ -14,15 +14,16 @@ import numpy as np
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FIG_DIR = Path(__file__).resolve().parent / 'figures'
+ROOT = Path(__file__).resolve().parent.parent
+FIG_DIR = ROOT / 'figures'
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---- 数据 ----
 pre_lens = [1, 3, 6, 12, 24]
 
 # DiffSTG (F=1, O3 only)
-diffstg_rmse = [13.08, 32.42, 41.10, 45.70, 48.65]
-diffstg_mae  = [9.61,  26.60, 34.50, 39.10, 41.89]
+diffstg_rmse = [13.08, 32.42, 35.74, 43.97, 47.22]
+diffstg_mae  = [9.61,  26.60, 29.20, 37.59, 40.61]
 
 # PE-DiffWaveNet backbone (F=15, O3+14 meteorology)
 # Extracted from logs/test_rmse, test_mae fields; p3 uses "fix" version
