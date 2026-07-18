@@ -38,9 +38,9 @@ python train.py --data AIR_N95_PM25 --T_h 24 --T_p 6 --seed 42 \
 
 ## 输出位置
 
+- 输出目录：external_baselines_F1/DiffSTG/output
+- 日志文件：delivery/logs/diffstg_advanced/diffstg_F1_pm25_p6_l24_s42.log
 - 结果 CSV：delivery/logs/diffstg_advanced/single_target_results.csv
-- 运行记录：external_baselines_F1/run_command.sh（第九节）
-- 训练日志：本实验在队友本地 Windows 11 + RTX 3050 环境运行，原始 stdout 日志未同步至本机；结果以 single_target_results.csv 为准（标注 best_epoch=22）
 
 ## 指标
 
@@ -53,12 +53,12 @@ best_epoch: 22
 ## 现象和结论
 
 进阶实验：三污染物对比之一——PM2.5。
-PM2.5 绝对误差最低（MAE=25.05），归一化 RMSE/Range=7.18%，介于 O3（10.02%）和 PM10（3.03%）之间。
+PM2.5 绝对误差最低（MAE=25.05），归一化 RMSE/Range=7.18%，介于 O3（8.72%）和 PM10（3.03%）之间。
 相比 O3（MAE=29.20），PM2.5 更易预测，因为 PM2.5 主要受排放和传输影响，历史值信息量较大；
 而 O3 是光化学反应产物，强依赖辐射和温度等气象条件，仅靠历史值不足以预测光化学拐点。
 这证实了为 O3 引入气象因子（F=15）的必要性。
 
-## 问题
+## 备注
 
-- 原始训练日志在队友本地环境，未同步至交付机；结果以 single_target_results.csv 为准
-- 数据范围 [1, 543]，极端高值（沙尘暴等）可能影响 RMSE
+- 数据范围 [1, 543]，极端高值可能影响 RMSE
+
