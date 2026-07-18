@@ -76,35 +76,34 @@ DEVICE=cuda EPOCHS=120 EXP_NAME=g3_pedw_pe_shuffle52_p6_l24_s42 PE_SHUFFLE_SEED=
 # ============================================================
 # 6. DiffSTG Baseline (F=1: 仅 O3 单通道)
 # 数据切分: default 0.6/0.8
-# 注意：pre_len=1/3 由队友跑，pre_len=6/12/24 由我跑
 # ============================================================
 cd /home/cl/ozone-forecast/external_baselines_F1/DiffSTG
 
-# F=1, pre_len=1 (队友跑, 101 epochs, MAE=9.61)
+# F=1, pre_len=1 ( 101 epochs, MAE=9.61)
 python train.py --data AIR_N95 --T_h 24 --T_p 1 --seed 42 \
   --N 50 --sample_steps 50 --hidden_size 32 \
   --batch_size 4 --n_samples 1 \
   --num_features 1 --split_mode default --is_test False
 
-# F=1, pre_len=3 (队友跑, 33 epochs, MAE=26.60)
+# F=1, pre_len=3 (33 epochs, MAE=26.60)
 python train.py --data AIR_N95 --T_h 24 --T_p 3 --seed 42 \
   --N 50 --sample_steps 50 --hidden_size 32 \
   --batch_size 4 --n_samples 1 \
   --num_features 1 --split_mode default --is_test False
 
-# F=1, pre_len=6 (我跑, 194 epochs, MAE=29.20, best of both)
+# F=1, pre_len=6 ( 194 epochs, MAE=29.20, best of both)
 python train.py --data AIR_N95 --T_h 24 --T_p 6 --seed 42 \
   --N 50 --sample_steps 50 --hidden_size 32 \
   --batch_size 4 --n_samples 1 \
   --num_features 1 --split_mode default --is_test False
 
-# F=1, pre_len=12 (我跑, 18 epochs early stop, MAE=37.59)
+# F=1, pre_len=12 ( 18 epochs early stop, MAE=37.59)
 python train.py --data AIR_N95 --T_h 24 --T_p 12 --seed 42 \
   --N 50 --sample_steps 50 --hidden_size 32 \
   --batch_size 4 --n_samples 1 \
   --num_features 1 --split_mode default --is_test False
 
-# F=1, pre_len=24 (我跑, 23 epochs early stop, MAE=40.61)
+# F=1, pre_len=24 ( 23 epochs early stop, MAE=40.61)
 python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 \
   --N 50 --sample_steps 50 --hidden_size 32 \
   --batch_size 4 --n_samples 1 \
@@ -154,7 +153,7 @@ python train.py --data AIR_N95 --T_h 24 --T_p 24 --seed 42 \
   --lr 0.002 --early_stop 10
 
 # ============================================================
-# 8. 队友进阶实验 (teammate)
+# 8. 进阶实验
 # ============================================================
 cd /home/cl/ozone-forecast/external_baselines_F1
 

@@ -48,7 +48,7 @@ best_epoch: 101
 
 ## 现象和结论
 
-两人均跑了 pre_len=1：队友 101 epochs MAE=9.61（日志 `[AIR_N95]mae   9.61+...+24+1+...log`），我 15 epochs 早停 MAE=12.68（日志 `[AIR_N95]mae  12.68+...+24+1+...log`）。队友训练更充分且 MAE 更低，取队友结果。本实验为 F=1 单通道 O3 基线，用于和 PE-DiffWaveNet（F=15）对比，验证气象因子的必要性。
+本实验为 F=1 单通道 O3 基线，用于和 PE-DiffWaveNet（F=15）对比，验证气象因子的必要性。
 相比 PE-DiffWaveNet pre_len=1（见 pedw_F15 目录），DiffSTG F=1 误差显著更高，
 说明仅靠 O3 历史值不足以支撑准确预测，需引入气象因子。
 

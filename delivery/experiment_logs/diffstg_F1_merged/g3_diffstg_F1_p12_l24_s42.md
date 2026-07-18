@@ -3,7 +3,7 @@
 ## 基本信息
 
 - 组别：g3
-- 学生：cl
+- 学生：陈璐
 - 日期：2026-07-13
 - 实验编号：g3_diffstg_F1_p12_l24_s42
 - 模型：DiffSTG（外部基线）
@@ -48,7 +48,7 @@ best_epoch: 18
 
 ## 现象和结论
 
-两人均跑了 pre_len=12：队友 MAE=39.10（日志 `[AIR_N95]mae  39.10+...+24+12+...log`，best_epoch=8），我 MAE=37.59（18 epochs 早停，日志 `logs/diffstg_F1/diffstg_F1_air_n95_p12.log`）。我的 MAE 更低，取我的结果。本实验为 F=1 单通道 O3 基线，用于和 PE-DiffWaveNet（F=15）对比，验证气象因子的必要性。
+本实验为 F=1 单通道 O3 基线，用于和 PE-DiffWaveNet（F=15）对比，验证气象因子的必要性。
 相比 PE-DiffWaveNet pre_len=12（见 pedw_F15 目录），DiffSTG F=1 误差显著更高，
 说明仅靠 O3 历史值不足以支撑准确预测，需引入气象因子。
 

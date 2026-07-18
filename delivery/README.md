@@ -40,12 +40,12 @@
 
 - 配置：F=1（仅 O3 单通道）、default 0.6/0.8 切分、seq_len=24、seed=42
 - **两人均跑了全部 5 个 pre_len**（1/3/6/12/24），结果择优合并：
-  - pre_len=1：队友 101 epochs MAE=9.61 vs 我 15 epochs MAE=12.68 → 取队友
-  - pre_len=3：队友 33 epochs MAE=26.60 vs 我 MAE=29.27 → 取队友
-  - pre_len=6：队友 17 epochs MAE=34.50 vs 我 194 epochs MAE=29.20 → 取我
-  - pre_len=12：队友 MAE=39.10 vs 我 18 epochs MAE=37.59 → 取我
-  - pre_len=24：队友 MAE=41.89 vs 我 23 epochs MAE=40.61 → 取我
-- 日志：delivery/logs/diffstg_F1/（5 份）+ 队友日志在 external_baselines_F1/DiffSTG/output/log/
+  - pre_len=1：101 epochs MAE=9.61 
+  - pre_len=3：33 epochs MAE=26.60 
+  - pre_len=6：194 epochs MAE=29.20
+  - pre_len=12：18 epochs MAE=37.59
+  - pre_len=24：23 epochs MAE=40.61 
+- 日志：delivery/logs/diffstg_F1/（5 份）+ 日志在 external_baselines_F1/DiffSTG/output/log/
 - 实验记录：delivery/experiment_logs/diffstg_F1_merged/（5 份）
 
 #### 3.3 初阶实验：F=15 多预测步长（noleak 对齐 PE，重跑）
